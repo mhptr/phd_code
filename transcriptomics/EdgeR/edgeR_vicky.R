@@ -1,0 +1,52 @@
+
+directory = setwd("~/OneDrive - University of Warwick/WORK/Results/Transcriptomic/intersection_toRNAdo_all/filt_txt_readcounts_eld/")  #folder where you have your txt
+library(limma)  
+library(edgeR)  
+myTitle = "S345 vs WT in LB"  
+myComp = 'S345_vs_WT_LB.tagwise'  
+myFile = 'replicateCopy.txt'  
+myLabels = c('ko1', 'ko2', 'ko3', 'wt1', 'wt2', 'wt3')
+#################  add in variables
+####################  
+targets <- read.delim(file = myFile, stringsAsFactors = FALSE)  
+d <- readDGE(targets, skip = 1, columns=c(1,3) )
+cpm.d <- cpm(d)  
+d <- d[ rowSums(cpm.d > 2) >=3, ] # keep only those tags with more than 2 count per million in at least 3 samples  
+d <- calcNormFactors(d)  
+d <- estimateCommonDisp(d)  
+d <- estimateTagwiseDisp(d)  
+de.com <- exactTest(d)  
+detags.com <- rownames(topTags(de.com)$table)  
+write.table(file=paste(myComp, "table.txt", sep="."), x=topTags(de.com, n=50000))  
+write.table(file=paste(myComp, "counts.txt", sep="."), x=d$counts)  
+write.table(file=paste(myComp, "pseudo_counts.txt", sep="."), round(d$pseudo.counts, digits=1))
+# above- changed pseudo.alt to pseudo.counts - changed with new version?
+
+mySum1 = summary(decideTestsDGE(de.com, p.value=0.001)) # number of differentially expressed genes (down, same, up)  
+mySum2 = summary(decideTestsDGE(de.com, p.value=1e-10)) # number of differentially expressed genes (down, same, up)  
+myNumDiffExpr1 = mySum1[1] + mySum1[3] # significant(down) + significant(up)  
+myNumDiffExpr2 = mySum2[1] + mySum2[3] # significant(down) + significant(up)  
+myNumDiffExpr1  
+myNumDiffExpr2  
+####################  
+#plotBCV(d) 
+png(file=paste(myComp, "MDS.png", sep="."), height=600, width=600)  
+plotMDS(d, main=paste("MDS Plot:", myTitle), labels=myLabels)  
+dev.off()
+#plotMDS(d, main=paste("MDS Plot:", myTitle), xlim=c(-2,2), ylim=c(-1, 1), labels=myLabels) 
+####################  
+png(file=paste(myComp, "smearplot.p1E-3",paste(myNumDiffExpr1,"genes",sep=""), "png", sep="."), height=600, width=600)  
+top <- topTags(de.com, n = myNumDiffExpr1) # this determines which data points will be in red!  
+detags <- rownames(top$table)  
+plotSmear(d, de.tags = detags, main=paste("FC plot, common dispersion, p=0.001:", myTitle), cex=0.5, xaxp=c(-40,0,20), yaxp=c(-30,30,30))  
+abline(h = c(-2, 2), col = "dodgerblue", lwd=1.5)  
+dev.off()  
+####################  
+png(file=paste(myComp, "smearplot.p1E-10",paste(myNumDiffExpr2,"genes",sep=""), "png", sep="."), height=600, width=600)  
+top <- topTags(de.com, n = myNumDiffExpr2) # this determines which data points will be in red!  
+detags <- rownames(top$table)  
+plotSmear(d, de.tags = detags, main=paste("FC plot, common dispersion, p=1E-10:", myTitle), cex=0.5, xaxp=c(-40,0,20), yaxp=c(-30,30,30))  
+abline(h = c(-2, 2), col = "dodgerblue", lwd=1.5)  
+dev.off()  
+####################
+
