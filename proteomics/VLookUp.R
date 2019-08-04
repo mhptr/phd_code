@@ -62,7 +62,6 @@ DPP_SH5_vs_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minu
 DPP_LB_cat2_coping_with_stress = merge(DPP_LB, cat2_coping_with_stress, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_LB_cat2_coping_with_stress)
 # write.csv(DPP_LB_cat2_coping_with_stress, "./combined/output/GSEA_SGC/DPP/LB/DPP_LB_cat2_coping_with_stress.csv", row.names = F)
-# write.csv(DPP_LB_cat2_coping_with_stress, "./combined/output/GSEA_SGC/DPP/LB/DPP_LB_cat2_coping_with_stress_test.csv", row.names = F)
 DPP_M9_cat2_coping_with_stress = merge(DPP_M9, cat2_coping_with_stress, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_M9_cat2_coping_with_stress)
 # write.csv(DPP_M9_cat2_coping_with_stress, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_cat2_coping_with_stress.csv", row.names = F)
