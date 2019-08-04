@@ -88,9 +88,6 @@ dim(DPP_M9_cat3_Biofilm_formation)
 ##########################################################################################
 ##########################################################################################
 
-# Today is 4th of Aug 2019
-
-
 
 
 # Coping_with_stress_cat2 = read.csv("../SubtiWiki Exports /split_categories/cat2/Coping_with_stress.csv", header = T)
