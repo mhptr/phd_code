@@ -62,6 +62,7 @@ DPP_SH5_vs_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minu
 DPP_LB_cat2_coping_with_stress = merge(DPP_LB, cat2_coping_with_stress, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_LB_cat2_coping_with_stress)
 # write.csv(DPP_LB_cat2_coping_with_stress, "./combined/output/GSEA_SGC/DPP/LB/DPP_LB_cat2_coping_with_stress.csv", row.names = F)
+# write.csv(DPP_LB_cat2_coping_with_stress, "./combined/output/GSEA_SGC/DPP/LB/DPP_LB_cat2_coping_with_stress_test.csv", row.names = F)
 DPP_M9_cat2_coping_with_stress = merge(DPP_M9, cat2_coping_with_stress, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_M9_cat2_coping_with_stress)
 # write.csv(DPP_M9_cat2_coping_with_stress, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_cat2_coping_with_stress.csv", row.names = F)
@@ -188,7 +189,7 @@ Common_SH2_SH5 = read.csv("./combined/output/venn/Common_SH2_SH5.csv", header = 
 Common_SH2_SH5_Annot = merge(Common_SH2_SH5, geneWizard, by.x="X", by.y="locus", all.x = TRUE)
 rownames(Common_SH2_SH5_Annot) = Common_SH2_SH5_Annot$X
 Common_SH2_SH5_Annot = Common_SH2_SH5_Annot[,-1]
-write.csv(Common_SH2_SH5_Annot, "./combined/output/venn/Common_SH2_SH5_Annot.csv")
+# write.csv(Common_SH2_SH5_Annot, "./combined/output/venn/Common_SH2_SH5_Annot.csv")
 
 
 
