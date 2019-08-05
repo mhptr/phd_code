@@ -185,7 +185,40 @@ View(Common_SH5_SIG)
 
 
 
+#########################################################################################################
+## Merge Cat2, Cat3 and Cat4 with TP intersect = 05/08/19
+#########################################################################################################
 
+setwd("~/OneDrive - University of Warwick/WORK/Results/Transcriptomic/intersection_toRNAdo_all/")
+
+geneCategories = read.csv("./SubtiWiki Exports /geneCategories.csv", header = T)
+# cat2_coping_with_stress = geneCategories[geneCategories$category2 == "Coping with stress",]
+#write.csv(cat2_coping_with_stress, "../SubtiWiki Exports /split_categories/cat_all/cat2_coping_with_stress.csv", row.names = F)
+
+cat2_coping_with_stress = read.csv("./SubtiWiki Exports /split_categories/cat_all/cat2_coping_with_stress.csv", header = T)
+cat3_Biofilm_formation = read.csv("./SubtiWiki Exports /split_categories/cat3/cat3_Biofilm_formation.csv", header = T)
+
+DEG_M9 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_ko_M9_Annot_minus_spoVG_upp.csv", header = T)
+DEG_SH2 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_ko_SH2_Annot_minus_spoVG_upp.csv", header = T)
+DEG_SH5 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_ko_SH5_Annot_minus_spoVG_upp.csv", header = T)
+DEG_SH5_vs_SH2 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_WT_SH5_vs_SH2_Annot.csv", header = T)
+
+DEG_M9_cat2_coping_with_stress = merge(DEG_M9, cat2_coping_with_stress, by.x="X", by.y="gene", all.x = TRUE)
+dim(DEG_M9_cat2_coping_with_stress)
+DEG_M9_cat2_coping_with_stress = DEG_M9_cat2_coping_with_stress[,-2]
+
+# write.csv(DEG_M9_cat2_coping_with_stress, "./diff.exp.gene/DEG_SM/SGC_sm/GSEA_SGC/M9/DEG_M9_cat2_coping_with_stress.csv", row.names = F)
+
+#05/08/19
+
+cat2_Sporulation = geneCategories[geneCategories$category2 == "Sporulation",]
+# write.csv(cat2_Sporulation, "./SubtiWiki Exports /split_categories/cat2/cat2_Sporulation.csv", row.names = F)
+
+DEG_M9_cat2_Sporulation = merge(DEG_M9, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DEG_M9_cat2_coping_with_stress)
+DEG_M9_cat2_coping_with_stress = DEG_M9_cat2_coping_with_stress[,-2]
+
+# write.csv(DEG_M9_cat2_Sporulation, "./diff.exp.gene/DEG_SM/SGC_sm/GSEA_SGC/M9/DEG_M9_cat2_Sporulation.csv", row.names = F)
 
 
 

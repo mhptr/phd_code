@@ -41,15 +41,8 @@ geneCategories = read.csv("../SubtiWiki Exports /geneCategories.csv", header = T
 # cat3_Biofilm_formation = geneCategories[geneCategories$category3 == "Biofilm formation",]
 # write.csv(cat3_Biofilm_formation, "../SubtiWiki Exports /split_categories/cat3/cat3_Biofilm_formation.csv", row.names = F)
 
-
-
-
-
-
 cat2_coping_with_stress = read.csv("../SubtiWiki Exports /split_categories/cat_all/cat2_coping_with_stress.csv", header = T)
 cat3_Biofilm_formation = read.csv("../SubtiWiki Exports /split_categories/cat3/cat3_Biofilm_formation.csv", header = T)
-
-
 
 DPP_LB = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_LB_minus_spoVG_upp_annot.csv", header = T)
 DPP_M9 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_M9_minus_spoVG_upp_annot.csv", header = T)
@@ -81,6 +74,23 @@ dim(DPP_SH5_vs_SH2_cat2_coping_with_stress)
 DPP_M9_cat3_Biofilm_formation = merge(DPP_M9, cat3_Biofilm_formation, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_M9_cat3_Biofilm_formation)
 # write.csv(DPP_M9_cat3_Biofilm_formation, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_cat3_Biofilm_formation.csv", row.names = F)
+
+#05/08/19
+
+cat2_Sporulation = geneCategories[geneCategories$category2 == "Sporulation",]
+# write.csv(cat2_Sporulation, "./SubtiWiki Exports /split_categories/cat2/cat2_Sporulation.csv", row.names = F)
+
+DPP_M9_M9_cat2_Sporulation = merge(DPP_M9, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DPP_M9_M9_cat2_Sporulation)
+DPP_M9_M9_cat2_Sporulation = DPP_M9_M9_cat2_Sporulation[,-2]
+
+# write.csv(DPP_M9_M9_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_M9_cat2_Sporulation.csv", row.names = F)
+
+
+
+
+
+
 
 
 
