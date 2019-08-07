@@ -83,9 +83,17 @@ cat2_Sporulation = geneCategories[geneCategories$category2 == "Sporulation",]
 DPP_M9_M9_cat2_Sporulation = merge(DPP_M9, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_M9_M9_cat2_Sporulation)
 DPP_M9_M9_cat2_Sporulation = DPP_M9_M9_cat2_Sporulation[,-2]
-
 # write.csv(DPP_M9_M9_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_M9_cat2_Sporulation.csv", row.names = F)
 
+
+
+#06/08/19
+
+cat3_Translation = geneCategories[geneCategories$category3 == "Translation",]
+# write.csv(cat3_Translation, "../SubtiWiki Exports /split_categories/cat3/cat3_Translation.csv", row.names = F)
+DPP_SH2_cat3_Translation = merge(DPP_SH2, cat3_Translation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DPP_SH2_cat3_Translation)
+# write.csv(DPP_SH2_cat3_Translation, "./combined/output/GSEA_SGC/DPP/SH2/DPP_SH2_cat3_Translation.csv", row.names = F)
 
 
 

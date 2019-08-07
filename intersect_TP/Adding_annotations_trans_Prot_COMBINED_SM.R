@@ -252,9 +252,17 @@ cat2_Sporulation = geneCategories[geneCategories$category2 == "Sporulation",]
 intersect_TP_M9_cat2_Sporulation = merge(intersect_TP_M9, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
 dim(intersect_TP_M9_cat2_Sporulation)
 intersect_TP_M9_cat2_Sporulation = intersect_TP_M9_cat2_Sporulation[,-2]
-
 # write.csv(intersect_TP_M9_cat2_Sporulation, "./Result/GSEA_SGC/M9/intersect_TP_M9_cat2_Sporulation.csv", row.names = F)
 
+
+#06/08/19
+
+cat3_Translation = geneCategories[geneCategories$category3 == "Translation",]
+# write.csv(cat3_Translation, "./SubtiWiki Exports /split_categories/cat3/cat3_Translation.csv", row.names = F)
+intersect_TP_SH2_cat3_Translation = merge(intersect_TP_SH2, cat3_Translation, by.x="X", by.y="gene", all.x = TRUE)
+dim(intersect_TP_SH2_cat3_Translation)
+intersect_TP_SH2_cat3_Translation = intersect_TP_SH2_cat3_Translation[,-2]
+# write.csv(intersect_TP_SH2_cat3_Translation, "./Result/GSEA_SGC/SH2/intersect_TP_SH2_cat3_Translation.csv", row.names = F)
 
 
 
