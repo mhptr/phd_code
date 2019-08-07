@@ -85,8 +85,6 @@ dim(DPP_M9_M9_cat2_Sporulation)
 DPP_M9_M9_cat2_Sporulation = DPP_M9_M9_cat2_Sporulation[,-2]
 # write.csv(DPP_M9_M9_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_M9_cat2_Sporulation.csv", row.names = F)
 
-
-
 #06/08/19
 
 cat3_Translation = geneCategories[geneCategories$category3 == "Translation",]
@@ -95,6 +93,29 @@ DPP_SH2_cat3_Translation = merge(DPP_SH2, cat3_Translation, by.x="X", by.y="gene
 dim(DPP_SH2_cat3_Translation)
 # write.csv(DPP_SH2_cat3_Translation, "./combined/output/GSEA_SGC/DPP/SH2/DPP_SH2_cat3_Translation.csv", row.names = F)
 
+#07/08/19
+
+geneRegulations = read.csv("../SubtiWiki Exports /regulations.csv", header = T)
+
+DPP_LB_geneRegulations = merge(DPP_LB, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(DPP_LB_geneRegulations)
+# write.csv(DPP_LB_geneRegulations, "./combined/output/geneRegulations/DPP_LB_geneRegulations.csv", row.names = F, na = "")
+
+DPP_M9_geneRegulations = merge(DPP_M9, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(DPP_M9_geneRegulations)
+# write.csv(DPP_M9_geneRegulations, "./combined/output/geneRegulations/DPP_M9_geneRegulations.csv", row.names = F, na = "")
+
+DPP_SH2_geneRegulations = merge(DPP_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(DPP_SH2_geneRegulations)
+# write.csv(DPP_SH2_geneRegulations, "./combined/output/geneRegulations/DPP_SH2_geneRegulations.csv", row.names = F, na = "")
+
+DPP_SH5_geneRegulations = merge(DPP_SH5, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(DPP_SH5_geneRegulations)
+# write.csv(DPP_SH5_geneRegulations, "./combined/output/geneRegulations/DPP_SH5_geneRegulations.csv", row.names = F, na = "")
+
+DPP_SH5_vs_SH2_geneRegulations = merge(DPP_SH5_vs_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(DPP_SH5_vs_SH2_geneRegulations)
+# write.csv(DPP_SH5_vs_SH2_geneRegulations, "./combined/output/geneRegulations/DPP_SH5_vs_SH2_geneRegulations.csv", row.names = F, na = "")
 
 
 

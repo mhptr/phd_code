@@ -264,6 +264,25 @@ dim(intersect_TP_SH2_cat3_Translation)
 intersect_TP_SH2_cat3_Translation = intersect_TP_SH2_cat3_Translation[,-2]
 # write.csv(intersect_TP_SH2_cat3_Translation, "./Result/GSEA_SGC/SH2/intersect_TP_SH2_cat3_Translation.csv", row.names = F)
 
+#07/08/19
+
+geneRegulations = read.csv("./SubtiWiki Exports /regulations.csv", header = T)
+
+intersect_TP_M9_geneRegulations = merge(intersect_TP_M9, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(intersect_TP_M9_geneRegulations)
+# write.csv(intersect_TP_M9_geneRegulations, "./Result/geneRegulations/intersect_TP_M9_geneRegulations.csv", row.names = F, na = "")
+
+intersect_TP_SH2_geneRegulations = merge(intersect_TP_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(intersect_TP_SH2_geneRegulations)
+# write.csv(intersect_TP_SH2_geneRegulations, "./Result/geneRegulations/intersect_TP_SH2_geneRegulations.csv", row.names = F, na = "")
+
+intersect_TP_SH5_geneRegulations = merge(intersect_TP_SH5, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(intersect_TP_SH5_geneRegulations)
+# write.csv(intersect_TP_SH5_geneRegulations, "./Result/geneRegulations/intersect_TP_SH5_geneRegulations.csv", row.names = F, na = "")
+
+intersect_TP_SH5_vs_SH2_geneRegulations = merge(intersect_TP_SH5_vs_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+dim(intersect_TP_SH5_vs_SH2_geneRegulations)
+# write.csv(intersect_TP_SH5_vs_SH2_geneRegulations, "./Result/geneRegulations/intersect_TP_SH5_vs_SH2_geneRegulations.csv", row.names = F, na = "")
 
 
 
