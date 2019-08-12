@@ -254,6 +254,25 @@ dim(intersect_TP_M9_cat2_Sporulation)
 intersect_TP_M9_cat2_Sporulation = intersect_TP_M9_cat2_Sporulation[,-2]
 # write.csv(intersect_TP_M9_cat2_Sporulation, "./Result/GSEA_SGC/M9/intersect_TP_M9_cat2_Sporulation.csv", row.names = F)
 
+#12/08/19
+
+intersect_TP_SH2_cat2_Sporulation = merge(intersect_TP_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(intersect_TP_SH2_cat2_Sporulation)
+intersect_TP_SH2_cat2_Sporulation = na.omit(intersect_TP_SH2_cat2_Sporulation)
+dim(intersect_TP_SH2_cat2_Sporulation)
+# write.csv(intersect_TP_SH2_cat2_Sporulation, "./Result/GSEA_SGC/SH2/intersect_TP_SH2_cat2_Sporulation.csv", row.names = F)
+
+intersect_TP_SH5_cat2_Sporulation = merge(intersect_TP_SH5, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(intersect_TP_SH5_cat2_Sporulation)
+intersect_TP_SH5_cat2_Sporulation = na.omit(intersect_TP_SH5_cat2_Sporulation)
+dim(intersect_TP_SH5_cat2_Sporulation)
+# write.csv(intersect_TP_SH5_cat2_Sporulation, "./Result/GSEA_SGC/SH5/intersect_TP_SH5_cat2_Sporulation.csv", row.names = F)
+
+intersect_TP_SH5_vs_SH2_cat2_Sporulation = merge(intersect_TP_SH5_vs_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(intersect_TP_SH5_vs_SH2_cat2_Sporulation)
+intersect_TP_SH5_vs_SH2_cat2_Sporulation = na.omit(intersect_TP_SH5_vs_SH2_cat2_Sporulation)
+dim(intersect_TP_SH5_vs_SH2_cat2_Sporulation)
+# write.csv(intersect_TP_SH5_vs_SH2_cat2_Sporulation, "./Result/GSEA_SGC/SH5_vs_SH2/intersect_TP_SH5_vs_SH2_cat2_Sporulation.csv", row.names = F)
 
 #06/08/19
 

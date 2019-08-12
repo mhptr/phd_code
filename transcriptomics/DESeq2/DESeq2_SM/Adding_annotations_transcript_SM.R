@@ -201,6 +201,7 @@ cat3_Biofilm_formation = read.csv("./SubtiWiki Exports /split_categories/cat3/ca
 DEG_M9 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_ko_M9_Annot_minus_spoVG_upp.csv", header = T)
 DEG_SH2 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_ko_SH2_Annot_minus_spoVG_upp.csv", header = T)
 DEG_SH5 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_ko_SH5_Annot_minus_spoVG_upp.csv", header = T)
+DEG_SH5 = DEG_SH5[,-c(19,20)]
 DEG_SH5_vs_SH2 = read.csv("./diff.exp.gene/DEG_SM/Annotated_sm/Annot_diff.exp_minus_spoVG_upp/Data/DEG_WT_SH5_vs_SH2_Annot.csv", header = T)
 
 DEG_M9_cat2_coping_with_stress = merge(DEG_M9, cat2_coping_with_stress, by.x="X", by.y="gene", all.x = TRUE)
@@ -218,6 +219,29 @@ DEG_M9_cat2_Sporulation = merge(DEG_M9, cat2_Sporulation, by.x="X", by.y="gene",
 dim(DEG_M9_cat2_coping_with_stress)
 DEG_M9_cat2_coping_with_stress = DEG_M9_cat2_coping_with_stress[,-2]
 # write.csv(DEG_M9_cat2_Sporulation, "./diff.exp.gene/DEG_SM/SGC_sm/GSEA_SGC/M9/DEG_M9_cat2_Sporulation.csv", row.names = F)
+
+
+#12/08/19
+
+DEG_SH2_cat2_Sporulation = merge(DEG_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DEG_SH2_cat2_Sporulation)
+DEG_SH2_cat2_Sporulation = na.omit(DEG_SH2_cat2_Sporulation)
+dim(DEG_SH2_cat2_Sporulation)
+# write.csv(DEG_SH2_cat2_Sporulation, "./diff.exp.gene/DEG_SM/SGC_sm/GSEA_SGC/SH2/DEG_SH2_cat2_Sporulation.csv", row.names = F)
+
+DEG_SH5_cat2_Sporulation = merge(DEG_SH5, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DEG_SH5_cat2_Sporulation)
+DEG_SH5_cat2_Sporulation = na.omit(DEG_SH5_cat2_Sporulation)
+dim(DEG_SH5_cat2_Sporulation)
+# write.csv(DEG_SH5_cat2_Sporulation, "./diff.exp.gene/DEG_SM/SGC_sm/GSEA_SGC/SH5/DEG_SH5_cat2_Sporulation.csv", row.names = F)
+
+DEG_SH5_vs_SH2_cat2_Sporulation = merge(DEG_SH5_vs_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DEG_SH5_vs_SH2_cat2_Sporulation)
+DEG_SH5_vs_SH2_cat2_Sporulation = na.omit(DEG_SH5_vs_SH2_cat2_Sporulation)
+dim(DEG_SH5_vs_SH2_cat2_Sporulation)
+# write.csv(DEG_SH5_vs_SH2_cat2_Sporulation, "./diff.exp.gene/DEG_SM/SGC_sm/GSEA_SGC/SH5_vs_SH2/DEG_SH5_vs_SH2_cat2_Sporulation.csv", row.names = F)
+
+
 
 
 #06/08/19

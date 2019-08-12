@@ -85,6 +85,30 @@ dim(DPP_M9_M9_cat2_Sporulation)
 DPP_M9_M9_cat2_Sporulation = DPP_M9_M9_cat2_Sporulation[,-2]
 # write.csv(DPP_M9_M9_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_M9_M9_cat2_Sporulation.csv", row.names = F)
 
+#12/08/19
+
+DPP_SH2_cat2_Sporulation = merge(DPP_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DPP_SH2_cat2_Sporulation)
+DPP_SH2_cat2_Sporulation = na.omit(DPP_SH2_cat2_Sporulation)
+(DPP_SH2_cat2_Sporulation)
+# write.csv(DPP_SH2_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/SH2/DPP_SH2_cat2_Sporulation.csv", row.names = F)
+
+DPP_SH5_cat2_Sporulation = merge(DPP_SH5, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DPP_SH5_cat2_Sporulation)
+DPP_SH5_cat2_Sporulation = na.omit(DPP_SH5_cat2_Sporulation)
+dim(DPP_SH5_cat2_Sporulation)
+# write.csv(DPP_SH5_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_SH5_cat2_Sporulation.csv", row.names = F)
+
+DPP_SH5_vs_SH2_cat2_Sporulation = merge(DPP_SH5_vs_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
+dim(DPP_SH5_vs_SH2_cat2_Sporulation)
+DPP_SH5_vs_SH2_cat2_Sporulation = na.omit(DPP_SH5_vs_SH2_cat2_Sporulation)
+dim(DPP_SH5_vs_SH2_cat2_Sporulation)
+# write.csv(DPP_SH5_vs_SH2_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_SH5_vs_SH2_cat2_Sporulation.csv", row.names = F)
+
+
+
+
+
 #06/08/19
 
 cat3_Translation = geneCategories[geneCategories$category3 == "Translation",]
