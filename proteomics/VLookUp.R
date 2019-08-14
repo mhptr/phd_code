@@ -35,6 +35,47 @@ setwd("~/OneDrive - University of Warwick/WORK/Results/Proteomics/FINAL Result/A
 #########################################################################################################
 
 geneCategories = read.csv("../SubtiWiki Exports /geneCategories.csv", header = T)
+regulations = read.csv("../SubtiWiki Exports /regulations.csv", header = T)
+
+#14/08/19
+
+DPP_LB = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_LB_minus_spoVG_upp_annot.csv", header = T)
+DPP_M9 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_M9_minus_spoVG_upp_annot.csv", header = T)
+DPP_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH2_minus_spoVG_upp_annot.csv", header = T)
+DPP_SH5 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_minus_spoVG_upp_annot.csv", header = T)
+DPP_SH5_vs_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_vs_SH2_annot_minus_spoVG_upp_annot.csv", header = T)
+
+DPP_LB_geneCategories = merge(DPP_LB, geneCategories, by.x="X", by.y="gene", all.x = TRUE)
+DPP_LB_geneCategories_regulations = merge(DPP_LB_geneCategories, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+write.csv(DPP_LB_geneCategories_regulations, "./combined/output/geneRegulations/DPP_LB_geneCategories_regulations.csv", row.names = F)
+
+DPP_M9_geneCategories = merge(DPP_M9, geneCategories, by.x="X", by.y="gene", all.x = TRUE)
+DPP_M9_geneCategories_regulations = merge(DPP_M9_geneCategories, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+write.csv(DPP_M9_geneCategories_regulations, "./combined/output/geneRegulations/DPP_M9_geneCategories_regulations.csv", row.names = F)
+
+DPP_SH2_geneCategories = merge(DPP_SH2, geneCategories, by.x="X", by.y="gene", all.x = TRUE)
+DPP_SH2_geneCategories_regulations = merge(DPP_SH2_geneCategories, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+write.csv(DPP_SH2_geneCategories_regulations, "./combined/output/geneRegulations/DPP_SH2_geneCategories_regulations.csv", row.names = F)
+
+DPP_SH5_geneCategories = merge(DPP_SH5, geneCategories, by.x="X", by.y="gene", all.x = TRUE)
+DPP_SH5_geneCategories_regulations = merge(DPP_SH5_geneCategories, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+write.csv(DPP_SH5_geneCategories_regulations, "./combined/output/geneRegulations/DPP_SH5_geneCategories_regulations.csv", row.names = F)
+
+DPP_SH5_vs_SH2_geneCategories = merge(DPP_SH5_vs_SH2, geneCategories, by.x="X", by.y="gene", all.x = TRUE)
+DPP_SH5_vs_SH2_geneCategories_regulations = merge(DPP_SH5_vs_SH2_geneCategories, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+write.csv(DPP_SH5_vs_SH2_geneCategories_regulations, "./combined/output/geneRegulations/DPP_SH5_vs_SH2_geneCategories_regulations.csv", row.names = F)
+
+
+
+
+
+
+
+
+
+
+
+
 # cat2_coping_with_stress = geneCategories[geneCategories$category2 == "Coping with stress",]
 # write.csv(cat2_coping_with_stress, "../SubtiWiki Exports /split_categories/cat_all/cat2_coping_with_stress.csv", row.names = F)
 
@@ -44,11 +85,6 @@ geneCategories = read.csv("../SubtiWiki Exports /geneCategories.csv", header = T
 cat2_coping_with_stress = read.csv("../SubtiWiki Exports /split_categories/cat_all/cat2_coping_with_stress.csv", header = T)
 cat3_Biofilm_formation = read.csv("../SubtiWiki Exports /split_categories/cat3/cat3_Biofilm_formation.csv", header = T)
 
-DPP_LB = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_LB_minus_spoVG_upp_annot.csv", header = T)
-DPP_M9 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_M9_minus_spoVG_upp_annot.csv", header = T)
-DPP_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH2_minus_spoVG_upp_annot.csv", header = T)
-DPP_SH5 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_minus_spoVG_upp_annot.csv", header = T)
-DPP_SH5_vs_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_vs_SH2_annot_minus_spoVG_upp_annot.csv", header = T)
 
 #DPP
 
@@ -97,13 +133,13 @@ DPP_SH5_cat2_Sporulation = merge(DPP_SH5, cat2_Sporulation, by.x="X", by.y="gene
 dim(DPP_SH5_cat2_Sporulation)
 DPP_SH5_cat2_Sporulation = na.omit(DPP_SH5_cat2_Sporulation)
 dim(DPP_SH5_cat2_Sporulation)
-# write.csv(DPP_SH5_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_SH5_cat2_Sporulation.csv", row.names = F)
+# write.csv(DPP_SH5_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/SH5/DPP_SH5_cat2_Sporulation.csv", row.names = F)
 
 DPP_SH5_vs_SH2_cat2_Sporulation = merge(DPP_SH5_vs_SH2, cat2_Sporulation, by.x="X", by.y="gene", all.x = TRUE)
 dim(DPP_SH5_vs_SH2_cat2_Sporulation)
 DPP_SH5_vs_SH2_cat2_Sporulation = na.omit(DPP_SH5_vs_SH2_cat2_Sporulation)
 dim(DPP_SH5_vs_SH2_cat2_Sporulation)
-# write.csv(DPP_SH5_vs_SH2_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/M9/DPP_SH5_vs_SH2_cat2_Sporulation.csv", row.names = F)
+# write.csv(DPP_SH5_vs_SH2_cat2_Sporulation, "./combined/output/GSEA_SGC/DPP/SH5_vs_SH2/DPP_SH5_vs_SH2_cat2_Sporulation.csv", row.names = F)
 
 
 
