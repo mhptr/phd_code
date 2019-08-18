@@ -45,6 +45,9 @@ DPP_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG
 DPP_SH5 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_minus_spoVG_upp_annot.csv", header = T)
 DPP_SH5_vs_SH2 = read.csv("./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_vs_SH2_annot_minus_spoVG_upp_annot.csv", header = T)
 
+DPP_M9_regulations = merge(DPP_M9, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+
+
 DPP_LB_geneCategories = merge(DPP_LB, geneCategories, by.x="X", by.y="gene", all.x = TRUE)
 DPP_LB_geneCategories_regulations = merge(DPP_LB_geneCategories, regulations, by.x="X", by.y="locus.tag", all.x = TRUE)
 write.csv(DPP_LB_geneCategories_regulations, "./combined/output/geneRegulations/DPP_LB_geneCategories_regulations.csv", row.names = F)
