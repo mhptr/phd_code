@@ -257,23 +257,28 @@ DEG_SH2_cat3_Translation = DEG_SH2_cat3_Translation[,-2]
 
 geneRegulations = read.csv("./SubtiWiki Exports /regulations.csv", header = T)
 
-DEG_M9_geneRegulations = merge(DEG_M9, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
-dim(DEG_M9_geneRegulations)
-# write.csv(DEG_M9_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_M9_geneRegulations.csv", row.names = F, na = "")
+# DEG_M9_geneRegulations = merge(DEG_M9, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+# dim(DEG_M9_geneRegulations)
+# # write.csv(DEG_M9_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_M9_geneRegulations.csv", row.names = F, na = "")
+# 
+# DEG_SH2_geneRegulations = merge(DEG_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+# dim(DEG_SH2_geneRegulations)
+# # write.csv(DEG_SH2_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH2_geneRegulations.csv", row.names = F, na = "")
+# 
+# DEG_SH5_geneRegulations = merge(DEG_SH5, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+# dim(DEG_SH5_geneRegulations)
+# # write.csv(DEG_SH5_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH5_geneRegulations.csv", row.names = F, na = "")
+# 
+# DEG_SH5_vs_SH2_geneRegulations = merge(DEG_SH5_vs_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
+# dim(DEG_SH5_vs_SH2_geneRegulations)
+# # write.csv(DEG_SH5_vs_SH2_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH5_vs_SH2_geneRegulations.csv", row.names = F, na = "")
 
-DEG_SH2_geneRegulations = merge(DEG_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
-dim(DEG_SH2_geneRegulations)
-# write.csv(DEG_SH2_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH2_geneRegulations.csv", row.names = F, na = "")
+#22/08/19
 
-DEG_SH5_geneRegulations = merge(DEG_SH5, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
-dim(DEG_SH5_geneRegulations)
-# write.csv(DEG_SH5_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH5_geneRegulations.csv", row.names = F, na = "")
-
-DEG_SH5_vs_SH2_geneRegulations = merge(DEG_SH5_vs_SH2, geneRegulations, by.x="X", by.y="locus.tag", all.x = TRUE)
-dim(DEG_SH5_vs_SH2_geneRegulations)
-# write.csv(DEG_SH5_vs_SH2_geneRegulations, "./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH5_vs_SH2_geneRegulations.csv", row.names = F, na = "")
-
-
+DEG_M9_geneRegulations = read.csv("./diff.exp.gene/DEG_SM/geneRegulations/DEG_M9_geneRegulations.csv", header = T)
+DEG_SH2_geneRegulations = read.csv("./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH2_geneRegulations.csv", header = T)
+DEG_SH5_geneRegulations = read.csv("./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH5_geneRegulations.csv", header = T)
+DEG_SH5_vs_SH2_geneRegulations = read.csv("./diff.exp.gene/DEG_SM/geneRegulations/DEG_SH5_vs_SH2_geneRegulations.csv", header = T)
 
 
 
