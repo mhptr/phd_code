@@ -7,7 +7,7 @@ DPP_LB_regulations = read.csv("./combined/output/geneRegulations/old/regulations
 DPP_M9_regulations = read.csv("./combined/output/geneRegulations/old/regulations/DPP_M9_geneRegulations.csv", header = T)
 DPP_SH2_regulations = read.csv("./combined/output/geneRegulations/old/regulations/DPP_SH2_geneRegulations.csv", header = T)
 DPP_SH5_regulations = read.csv("./combined/output/geneRegulations/old/regulations/DPP_SH5_geneRegulations.csv", header = T)
-DPP_SH5_vs_SH2_regulations = read.csv("./combined/output/geneRegulations/oldregulations//DPP_SH5_vs_SH2_geneRegulations.csv", header = T)
+DPP_SH5_vs_SH2_regulations = read.csv("./combined/output/geneRegulations/old/regulations/DPP_SH5_vs_SH2_geneRegulations.csv", header = T)
 
 # dim(DPP_LB_regulations)
 # DPP_LB_regulations = DPP_LB_regulations[!DPP_LB_regulations$regulator == "",]
