@@ -26,6 +26,47 @@ DEG_ko_M9_Annot_Reg=DEG_ko_M9_Annot_Reg[,-1]
 #write.csv(DEG_ko_M9_Annot_Reg,"./DEG_SM/Annotated_sm/DEG_ko_M9_Annot_Reg_sm.csv")
 
 
+#12/09/19
+
+#M9
+DEG_ko_M9_all = read.csv("./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_M9_minus_spoVG_upp.csv",header=T)
+rownames(DEG_ko_M9_all) = DEG_ko_M9_all$X
+DEG_ko_M9_all = DEG_ko_M9_all[unique(DEG_ko_M9_all$X),]
+DEG_ko_M9_all_Annot = merge(DEG_ko_M9_all,geneWizard,by.x="X",by.y="locus",all.x=TRUE)
+DEG_ko_M9_all_Annot = DEG_ko_M9_all_Annot [, -c(19,20)]
+write.csv(DEG_ko_M9_all_Annot,"./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/Annotated/DEG_ko_M9_all_Annot.csv", row.names = F)
+
+
+#SH2
+DEG_ko_SH2_all = read.csv("./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_SH2_minus_spoVG_upp.csv",header=T)
+rownames(DEG_ko_SH2_all) = DEG_ko_SH2_all$X
+DEG_ko_SH2_all = DEG_ko_SH2_all[unique(DEG_ko_SH2_all$X),]
+DEG_ko_SH2_all_Annot = merge(DEG_ko_SH2_all,geneWizard,by.x="X",by.y="locus",all.x=TRUE)
+DEG_ko_SH2_all_Annot = DEG_ko_SH2_all_Annot [, -c(19,20)]
+write.csv(DEG_ko_SH2_all_Annot,"./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/Annotated/DEG_ko_SH2_all_Annot.csv", row.names = F)
+
+
+#SH5
+DEG_ko_SH5_all = read.csv("./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_SH5_minus_spoVG_upp.csv",header=T)
+rownames(DEG_ko_SH5_all) = DEG_ko_SH5_all$X
+DEG_ko_SH5_all = DEG_ko_SH5_all[unique(DEG_ko_SH5_all$X),]
+DEG_ko_SH5_all_Annot = merge(DEG_ko_SH5_all,geneWizard,by.x="X",by.y="locus",all.x=TRUE)
+DEG_ko_SH5_all_Annot = DEG_ko_SH5_all_Annot [, -c(19,20)]
+write.csv(DEG_ko_SH5_all_Annot,"./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/Annotated/DEG_ko_SH5_all_Annot.csv", row.names = F)
+
+
+#SH5_vs_SH2
+DEG_ko_SH5_vs_SH2_all = read.csv("./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/",header=T)
+rownames(DEG_ko_SH5_vs_SH2_all) = DEG_ko_SH5_vs_SH2_all$X
+DEG_ko_SH5_vs_SH2_all = DEG_ko_SH5_vs_SH2_all[unique(DEG_ko_SH5_vs_SH2_all$X),]
+DEG_ko_SH5_vs_SH2_all_Annot = merge(DEG_ko_SH5_vs_SH2_all,geneWizard,by.x="X",by.y="locus",all.x=TRUE)
+DEG_ko_SH5_vs_SH2_all_Annot = DEG_ko_SH5_vs_SH2_all_Annot [, -c(19,20)]
+write.csv(DEG_ko_SH5_vs_SH2_all_Annot,"./DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/Annotated/DEG_ko_SH5_vs_SH2_all_Annot.csv", row.names = F)
+
+
+
+
+
 ################################
 ##SM-SH2-kovswt
 ################################

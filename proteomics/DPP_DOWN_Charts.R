@@ -1,5 +1,5 @@
 #making graphs and charts of DPP
-#18/08/19
+#05/09/19
 
 setwd("~/OneDrive - University of Warwick/WORK/Results/Proteomics/FINAL Result/Analysis - R-Script /Data/")
 
@@ -34,83 +34,83 @@ DPP_SH5_vs_SH2_regulations = read.csv("./combined/output/geneRegulations/old/reg
 # dim(DPP_SH5_vs_SH2_regulations)
 # write.csv(DPP_SH5_vs_SH2_regulations, "./combined/output/geneRegulations/old/regulations/csv/DPP_SH5_cs_SH2_regulations.csv", row.names = F)
 
-# #LB
-# DPP_LB_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_LB_regulations.csv", header = T)
-# DPP_LB_regulations_UP = DPP_LB_regulations[(DPP_LB_regulations$logFC)>0,]
-# DPP_LB_reg_freq_UP = table(DPP_LB_regulations_UP$regulator)
-# write.csv(DPP_LB_reg_freq_UP, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_LB_reg_freq_UP.csv", row.names = F)
-# DPP_LB_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_LB_reg_freq_UP.csv", header = T)
-# colnames(DPP_LB_reg_freq_UP) = c("regulator", "frequency")
-# dim(DPP_LB_reg_freq_UP)
-# DPP_LB_reg_freq_UP = DPP_LB_reg_freq_UP[!DPP_LB_reg_freq_UP$regulator == "",]
-# dim(DPP_LB_reg_freq_UP)
-# DPP_LB_reg_freq_UP = DPP_LB_reg_freq_UP[(DPP_LB_reg_freq_UP$frequency)>0, ]
-# write.csv(DPP_LB_reg_freq_UP, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_LB_reg_freq_UP.csv", row.names = F)
-# View(DPP_LB_reg_freq_UP)
-# 
-# #M9
-# DPP_M9_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_M9_regulations.csv", header = T)
-# DPP_M9_regulations_UP = DPP_M9_regulations[(DPP_M9_regulations$logFC)>0,]
-# DPP_M9_reg_freq_UP = table(DPP_M9_regulations_UP$regulator)
-# write.csv(DPP_M9_reg_freq_UP, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_M9_reg_freq_UP.csv", row.names = F)
-# DPP_M9_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_M9_reg_freq_UP.csv", header = T)
-# colnames(DPP_M9_reg_freq_UP) = c("regulator", "frequency")
-# dim(DPP_M9_reg_freq_UP)
-# DPP_M9_reg_freq_UP = DPP_M9_reg_freq_UP[!DPP_M9_reg_freq_UP$regulator == "",]
-# dim(DPP_M9_reg_freq_UP)
-# DPP_M9_reg_freq_UP = DPP_M9_reg_freq_UP[(DPP_M9_reg_freq_UP$frequency)>0, ]
-# write.csv(DPP_M9_reg_freq_UP, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_M9_reg_freq_UP.csv", row.names = F)
-# View(DPP_M9_reg_freq_UP)
-# 
-# #SH2
-# DPP_SH2_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_SH2_regulations.csv", header = T)
-# DPP_SH2_regulations_UP = DPP_SH2_regulations[(DPP_SH2_regulations$logFC)>0,]
-# DPP_SH2_reg_freq_UP = table(DPP_SH2_regulations_UP$regulator)
-# write.csv(DPP_SH2_reg_freq_UP, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_SH2_reg_freq_UP.csv", row.names = F)
-# DPP_SH2_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_SH2_reg_freq_UP.csv", header = T)
-# colnames(DPP_SH2_reg_freq_UP) = c("regulator", "frequency")
-# dim(DPP_SH2_reg_freq_UP)
-# DPP_SH2_reg_freq_UP = DPP_SH2_reg_freq_UP[!DPP_SH2_reg_freq_UP$regulator == "",]
-# dim(DPP_SH2_reg_freq_UP)
-# DPP_SH2_reg_freq_UP = DPP_SH2_reg_freq_UP[(DPP_SH2_reg_freq_UP$frequency)>0, ]
-# write.csv(DPP_SH2_reg_freq_UP, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_SH2_reg_freq_UP.csv", row.names = F)
-# View(DPP_SH2_reg_freq_UP)
-# 
-# #SH5
-# DPP_SH5_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_SH5_regulations.csv", header = T)
-# DPP_SH5_regulations_UP = DPP_SH5_regulations[(DPP_SH5_regulations$logFC)>0,]
-# DPP_SH5_reg_freq_UP = table(DPP_SH5_regulations_UP$regulator)
-# write.csv(DPP_SH5_reg_freq_UP, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_SH5_reg_freq_UP.csv", row.names = F)
-# DPP_SH5_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_SH5_reg_freq_UP.csv", header = T)
-# colnames(DPP_SH5_reg_freq_UP) = c("regulator", "frequency")
-# dim(DPP_SH5_reg_freq_UP)
-# DPP_SH5_reg_freq_UP = DPP_SH5_reg_freq_UP[!DPP_SH5_reg_freq_UP$regulator == "",]
-# dim(DPP_SH5_reg_freq_UP)
-# DPP_SH5_reg_freq_UP = DPP_SH5_reg_freq_UP[(DPP_SH5_reg_freq_UP$frequency)>0, ]
-# write.csv(DPP_SH5_reg_freq_UP, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_SH5_reg_freq_UP.csv", row.names = F)
-# View(DPP_SH5_reg_freq_UP)
-# 
-# #SH5_vs_SH2
-# DPP_SH5_vs_SH2_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_SH5_vs_SH2_regulations.csv", header = T)
-# DPP_SH5_vs_SH2_regulations_UP = DPP_SH5_vs_SH2_regulations[(DPP_SH5_vs_SH2_regulations$logFC)>0,]
-# DPP_SH5_vs_SH2_reg_freq_UP = table(DPP_SH5_vs_SH2_regulations_UP$regulator)
-# write.csv(DPP_SH5_vs_SH2_reg_freq_UP, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_SH5_vs_SH2_reg_freq_UP.csv", row.names = F)
-# DPP_SH5_vs_SH2_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Up/DPP_SH5_vs_SH2_reg_freq_UP.csv", header = T)
-# colnames(DPP_SH5_vs_SH2_reg_freq_UP) = c("regulator", "frequency")
-# dim(DPP_SH5_vs_SH2_reg_freq_UP)
-# DPP_SH5_vs_SH2_reg_freq_UP = DPP_SH5_vs_SH2_reg_freq_UP[!DPP_SH5_vs_SH2_reg_freq_UP$regulator == "",]
-# dim(DPP_SH5_vs_SH2_reg_freq_UP)
-# DPP_SH5_vs_SH2_reg_freq_UP = DPP_SH5_vs_SH2_reg_freq_UP[(DPP_SH5_vs_SH2_reg_freq_UP$frequency)>0, ]
-# write.csv(DPP_SH5_vs_SH2_reg_freq_UP, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_SH5_vs_SH2_reg_freq_UP.csv", row.names = F)
-# View(DPP_SH5_vs_SH2_reg_freq_UP)
+#LB
+DPP_LB_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_LB_regulations.csv", header = T)
+DPP_LB_regulations_Down = DPP_LB_regulations[(DPP_LB_regulations$logFC)<0,]
+DPP_LB_reg_freq_Down = table(DPP_LB_regulations_Down$regulator)
+write.csv(DPP_LB_reg_freq_Down, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_LB_reg_freq_Down.csv", row.names = F)
+DPP_LB_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_LB_reg_freq_Down.csv", header = T)
+colnames(DPP_LB_reg_freq_Down) = c("regulator", "frequency")
+dim(DPP_LB_reg_freq_Down)
+DPP_LB_reg_freq_Down = DPP_LB_reg_freq_Down[!DPP_LB_reg_freq_Down$regulator == "",]
+dim(DPP_LB_reg_freq_Down)
+DPP_LB_reg_freq_Down = DPP_LB_reg_freq_Down[(DPP_LB_reg_freq_Down$frequency)<0, ]
+write.csv(DPP_LB_reg_freq_Down, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_LB_reg_freq_Down.csv", row.names = F)
+View(DPP_LB_reg_freq_Down)
+
+#M9
+DPP_M9_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_M9_regulations.csv", header = T)
+DPP_M9_regulations_Down = DPP_M9_regulations[(DPP_M9_regulations$logFC)<0,]
+DPP_M9_reg_freq_Down = table(DPP_M9_regulations_Down$regulator)
+write.csv(DPP_M9_reg_freq_Down, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_M9_reg_freq_Down.csv", row.names = F)
+DPP_M9_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_M9_reg_freq_Down.csv", header = T)
+colnames(DPP_M9_reg_freq_Down) = c("regulator", "frequency")
+dim(DPP_M9_reg_freq_Down)
+DPP_M9_reg_freq_Down = DPP_M9_reg_freq_Down[!DPP_M9_reg_freq_Down$regulator == "",]
+dim(DPP_M9_reg_freq_Down)
+DPP_M9_reg_freq_Down = DPP_M9_reg_freq_Down[(DPP_M9_reg_freq_Down$frequency)<0, ]
+write.csv(DPP_M9_reg_freq_Down, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_M9_reg_freq_Down.csv", row.names = F)
+View(DPP_M9_reg_freq_Down)
+
+#SH2
+DPP_SH2_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_SH2_regulations.csv", header = T)
+DPP_SH2_regulations_Down = DPP_SH2_regulations[(DPP_SH2_regulations$logFC)<0,]
+DPP_SH2_reg_freq_Down = table(DPP_SH2_regulations_Down$regulator)
+write.csv(DPP_SH2_reg_freq_Down, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_SH2_reg_freq_Down.csv", row.names = F)
+DPP_SH2_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_SH2_reg_freq_Down.csv", header = T)
+colnames(DPP_SH2_reg_freq_Down) = c("regulator", "frequency")
+dim(DPP_SH2_reg_freq_Down)
+DPP_SH2_reg_freq_Down = DPP_SH2_reg_freq_Down[!DPP_SH2_reg_freq_Down$regulator == "",]
+dim(DPP_SH2_reg_freq_Down)
+DPP_SH2_reg_freq_Down = DPP_SH2_reg_freq_Down[(DPP_SH2_reg_freq_Down$frequency)<0, ]
+write.csv(DPP_SH2_reg_freq_Down, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_SH2_reg_freq_Down.csv", row.names = F)
+View(DPP_SH2_reg_freq_Down)
+
+#SH5
+DPP_SH5_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_SH5_regulations.csv", header = T)
+DPP_SH5_regulations_Down = DPP_SH5_regulations[(DPP_SH5_regulations$logFC)<0,]
+DPP_SH5_reg_freq_Down = table(DPP_SH5_regulations_Down$regulator)
+write.csv(DPP_SH5_reg_freq_Down, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_SH5_reg_freq_Down.csv", row.names = F)
+DPP_SH5_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_SH5_reg_freq_Down.csv", header = T)
+colnames(DPP_SH5_reg_freq_Down) = c("regulator", "frequency")
+dim(DPP_SH5_reg_freq_Down)
+DPP_SH5_reg_freq_Down = DPP_SH5_reg_freq_Down[!DPP_SH5_reg_freq_Down$regulator == "",]
+dim(DPP_SH5_reg_freq_Down)
+DPP_SH5_reg_freq_Down = DPP_SH5_reg_freq_Down[(DPP_SH5_reg_freq_Down$frequency)<0, ]
+write.csv(DPP_SH5_reg_freq_Down, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_SH5_reg_freq_Down.csv", row.names = F)
+View(DPP_SH5_reg_freq_Down)
+
+#SH5_vs_SH2
+DPP_SH5_vs_SH2_regulations = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_SH5_vs_SH2_regulations.csv", header = T)
+DPP_SH5_vs_SH2_regulations_Down = DPP_SH5_vs_SH2_regulations[(DPP_SH5_vs_SH2_regulations$logFC)<0,]
+DPP_SH5_vs_SH2_reg_freq_Down = table(DPP_SH5_vs_SH2_regulations_Down$regulator)
+write.csv(DPP_SH5_vs_SH2_reg_freq_Down, "./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_SH5_vs_SH2_reg_freq_Down.csv", row.names = F)
+DPP_SH5_vs_SH2_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulations/csv/DPP_regulation_freq_Down/DPP_SH5_vs_SH2_reg_freq_Down.csv", header = T)
+colnames(DPP_SH5_vs_SH2_reg_freq_Down) = c("regulator", "frequency")
+dim(DPP_SH5_vs_SH2_reg_freq_Down)
+DPP_SH5_vs_SH2_reg_freq_Down = DPP_SH5_vs_SH2_reg_freq_Down[!DPP_SH5_vs_SH2_reg_freq_Down$regulator == "",]
+dim(DPP_SH5_vs_SH2_reg_freq_Down)
+DPP_SH5_vs_SH2_reg_freq_Down = DPP_SH5_vs_SH2_reg_freq_Down[(DPP_SH5_vs_SH2_reg_freq_Down$frequency)<0, ]
+write.csv(DPP_SH5_vs_SH2_reg_freq_Down, "./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_SH5_vs_SH2_reg_freq_Down.csv", row.names = F)
+View(DPP_SH5_vs_SH2_reg_freq_Down)
 
 
 #frequency tables
-DPP_LB_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_LB_reg_freq_UP.csv", header = T)
-DPP_M9_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_M9_reg_freq_UP.csv", header = T)
-DPP_SH2_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_SH2_reg_freq_UP.csv", header = T)
-DPP_SH5_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_SH5_reg_freq_UP.csv", header = T)
-DPP_SH5_vs_SH2_reg_freq_UP = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_UP/DPP_SH5_vs_SH2_reg_freq_UP.csv", header = T)
+DPP_LB_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_LB_reg_freq_Down.csv", header = T)
+DPP_M9_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_M9_reg_freq_Down.csv", header = T)
+DPP_SH2_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_SH2_reg_freq_Down.csv", header = T)
+DPP_SH5_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_SH5_reg_freq_Down.csv", header = T)
+DPP_SH5_vs_SH2_reg_freq_Down = read.csv("./combined/output/geneRegulations/old/regulators/csv/DPP_reg_freq_Down/DPP_SH5_vs_SH2_reg_freq_Down.csv", header = T)
 
 
 library(ggplot2)
@@ -125,24 +125,24 @@ swati.color = c(brewer.pal(8,"Dark2"))
 # Barplot
 
 #LB
-DPP_LB_reg_freq_UP_mod = DPP_LB_reg_freq_UP[(DPP_LB_reg_freq_UP$frequency)>2,]
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Up_barplot/barplot_DPP_LB_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-DPP_LB_reg_freq_UP_mod = ggplot(DPP_LB_reg_freq_UP_mod, aes(x="", y=frequency, fill=regulator))+
-  geom_bar(width = 2, stat = "identity") + ggtitle("DPP LB reg UP") + 
+DPP_LB_reg_freq_Down_mod = DPP_LB_reg_freq_Down[(DPP_LB_reg_freq_Down$frequency)>2,]
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Down_barplot/barplot_DPP_LB_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+DPP_LB_reg_freq_Down_mod = ggplot(DPP_LB_reg_freq_Down_mod, aes(x="", y=frequency, fill=regulator))+
+  geom_bar(width = 2, stat = "identity") + ggtitle("DPP LB reg Down") + 
   xlab("Regulons affected due to del_spoVG in LB") + ylab("No. of genes in each regulon") +
   theme(
        plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
        axis.title.x = element_text(color="black", size=12, face="bold"),
        axis.title.y = element_text(color="black", size=12, face="bold")
      )
-DPP_LB_reg_freq_UP_mod
+DPP_LB_reg_freq_Down_mod
 coord_fixed()
 dev.off()  
 #Create a pie chart 
 # pie_LB = regulators_LB + coord_polar("y", start=0) + geom_text(aes(y = frequency/length(DPP_LB_regulators_mod$regulator) + c(0, cumsum(frequency)[-length(frequency)]), 
 #                                                                    label = percent(frequency/100)), size=5)
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Up_pie/pie_DPP_LB_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-pie_LB = DPP_LB_reg_freq_UP_mod + coord_polar("y", start=0)
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Down_pie/pie_DPP_LB_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pie_LB = DPP_LB_reg_freq_Down_mod + coord_polar("y", start=0)
 pie_LB
 coord_fixed()
 dev.off() 
@@ -151,112 +151,112 @@ dev.off()
 
 
 #M9
-DPP_M9_reg_freq_UP_mod = DPP_M9_reg_freq_UP[(DPP_M9_reg_freq_UP$frequency)>2,]
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Up_barplot/barplot_DPP_M9_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-DPP_M9_reg_freq_UP_mod = ggplot(DPP_M9_reg_freq_UP_mod, aes(x="", y=frequency, fill=regulator))+
-  geom_bar(width = 2, stat = "identity") + ggtitle("DPP M9 reg UP") + 
+DPP_M9_reg_freq_Down_mod = DPP_M9_reg_freq_Down[(DPP_M9_reg_freq_Down$frequency)>2,]
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Down_barplot/barplot_DPP_M9_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+DPP_M9_reg_freq_Down_mod = ggplot(DPP_M9_reg_freq_Down_mod, aes(x="", y=frequency, fill=regulator))+
+  geom_bar(width = 2, stat = "identity") + ggtitle("DPP M9 reg Down") + 
   xlab("Regulons affected due to del_spoVG in M9") + ylab("No. of genes in each regulon") +
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
     axis.title.x = element_text(color="black", size=12, face="bold"),
     axis.title.y = element_text(color="black", size=12, face="bold")
   )
-DPP_M9_reg_freq_UP_mod
+DPP_M9_reg_freq_Down_mod
 coord_fixed()
 dev.off()  
 #Create a pie chart 
 # pie_M9 = regulators_M9 + coord_polar("y", start=0) + geom_text(aes(y = frequency/length(DPP_M9_regulators_mod$regulator) + c(0, cumsum(frequency)[-length(frequency)]), 
 #                                                                    label = percent(frequency/100)), size=5)
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Up_pie/pie_DPP_M9_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-pie_M9 = DPP_M9_reg_freq_UP_mod + coord_polar("y", start=0)
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Down_pie/pie_DPP_M9_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pie_M9 = DPP_M9_reg_freq_Down_mod + coord_polar("y", start=0)
 pie_M9
 coord_fixed()
 dev.off() 
 
 
 #SH2
-DPP_SH2_reg_freq_UP_mod = DPP_SH2_reg_freq_UP[(DPP_SH2_reg_freq_UP$frequency)>9,]
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Up_barplot/barplot_DPP_SH2_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-DPP_SH2_reg_freq_UP_mod = ggplot(DPP_SH2_reg_freq_UP_mod, aes(x="", y=frequency, fill=regulator))+
-  geom_bar(width = 2, stat = "identity") + ggtitle("DPP SH2 reg UP") + 
+DPP_SH2_reg_freq_Down_mod = DPP_SH2_reg_freq_Down[(DPP_SH2_reg_freq_Down$frequency)>9,]
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Down_barplot/barplot_DPP_SH2_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+DPP_SH2_reg_freq_Down_mod = ggplot(DPP_SH2_reg_freq_Down_mod, aes(x="", y=frequency, fill=regulator))+
+  geom_bar(width = 2, stat = "identity") + ggtitle("DPP SH2 reg Down") + 
   xlab("Regulons affected due to del_spoVG in SH2") + ylab("No. of genes in each regulon") +
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
     axis.title.x = element_text(color="black", size=12, face="bold"),
     axis.title.y = element_text(color="black", size=12, face="bold")
   )
-DPP_SH2_reg_freq_UP_mod
+DPP_SH2_reg_freq_Down_mod
 coord_fixed()
 dev.off()  
 #Create a pie chart 
 # pie_SH2 = regulators_SH2 + coord_polar("y", start=0) + geom_text(aes(y = frequency/length(DPP_SH2_regulators_mod$regulator) + c(0, cumsum(frequency)[-length(frequency)]), 
 #                                                                    label = percent(frequency/100)), size=5)
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Up_pie/pie_DPP_SH2_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-pie_SH2 = DPP_SH2_reg_freq_UP_mod + coord_polar("y", start=0)
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Down_pie/pie_DPP_SH2_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pie_SH2 = DPP_SH2_reg_freq_Down_mod + coord_polar("y", start=0)
 pie_SH2
 coord_fixed()
 dev.off() 
 
 
 #SH5
-DPP_SH5_reg_freq_UP_mod = DPP_SH5_reg_freq_UP[(DPP_SH5_reg_freq_UP$frequency)>2,]
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Up_barplot/barplot_DPP_SH5_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-DPP_SH5_reg_freq_UP_mod = ggplot(DPP_SH5_reg_freq_UP_mod, aes(x="", y=frequency, fill=regulator))+
-  geom_bar(width = 2, stat = "identity") + ggtitle("DPP SH5 reg UP") + 
+DPP_SH5_reg_freq_Down_mod = DPP_SH5_reg_freq_Down[(DPP_SH5_reg_freq_Down$frequency)>2,]
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Down_barplot/barplot_DPP_SH5_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+DPP_SH5_reg_freq_Down_mod = ggplot(DPP_SH5_reg_freq_Down_mod, aes(x="", y=frequency, fill=regulator))+
+  geom_bar(width = 2, stat = "identity") + ggtitle("DPP SH5 reg Down") + 
   xlab("Regulons affected due to del_spoVG in SH5") + ylab("No. of genes in each regulon") +
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
     axis.title.x = element_text(color="black", size=12, face="bold"),
     axis.title.y = element_text(color="black", size=12, face="bold")
   )
-DPP_SH5_reg_freq_UP_mod
+DPP_SH5_reg_freq_Down_mod
 coord_fixed()
 dev.off()  
 #Create a pie chart 
 # pie_SH5 = regulators_SH5 + coord_polar("y", start=0) + geom_text(aes(y = frequency/length(DPP_SH5_regulators_mod$regulator) + c(0, cumsum(frequency)[-length(frequency)]), 
 #                                                                    label = percent(frequency/100)), size=5)
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Up_pie/pie_DPP_SH5_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-pie_SH5 = DPP_SH5_reg_freq_UP_mod + coord_polar("y", start=0)
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Down_pie/pie_DPP_SH5_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pie_SH5 = DPP_SH5_reg_freq_Down_mod + coord_polar("y", start=0)
 pie_SH5
 coord_fixed()
 dev.off() 
 
 
 #SH5_vs_SH2
-DPP_SH5_vs_SH2_reg_freq_UP_mod = DPP_SH5_vs_SH2_reg_freq_UP[(DPP_SH5_vs_SH2_reg_freq_UP$frequency)>2,]
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Up_barplot/barplot_DPP_SH5_vs_SH2_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-DPP_SH5_vs_SH2_reg_freq_UP_mod = ggplot(DPP_SH5_vs_SH2_reg_freq_UP_mod, aes(x="", y=frequency, fill=regulator))+
-  geom_bar(width = 2, stat = "identity") + ggtitle("DPP SH5_vs_SH2 reg UP") + 
+DPP_SH5_vs_SH2_reg_freq_Down_mod = DPP_SH5_vs_SH2_reg_freq_Down[(DPP_SH5_vs_SH2_reg_freq_Down$frequency)>2,]
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Down_barplot/barplot_DPP_SH5_vs_SH2_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+DPP_SH5_vs_SH2_reg_freq_Down_mod = ggplot(DPP_SH5_vs_SH2_reg_freq_Down_mod, aes(x="", y=frequency, fill=regulator))+
+  geom_bar(width = 2, stat = "identity") + ggtitle("DPP SH5_vs_SH2 reg Down") + 
   xlab("Regulons affected due to del_spoVG in SH5_vs_SH2") + ylab("No. of genes in each regulon") +
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
     axis.title.x = element_text(color="black", size=12, face="bold"),
     axis.title.y = element_text(color="black", size=12, face="bold")
   )
-DPP_SH5_vs_SH2_reg_freq_UP_mod
+DPP_SH5_vs_SH2_reg_freq_Down_mod
 coord_fixed()
 dev.off()  
 #Create a pie chart 
 # pie_SH5_vs_SH2 = regulators_SH5_vs_SH2 + coord_polar("y", start=0) + geom_text(aes(y = frequency/length(DPP_SH5_vs_SH2_regulators_mod$regulator) + c(0, cumsum(frequency)[-length(frequency)]), 
 #                                                                    label = percent(frequency/100)), size=5)
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Up_pie/pie_DPP_SH5_vs_SH2_reg_UP.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-pie_SH5_vs_SH2 = DPP_SH5_vs_SH2_reg_freq_UP_mod + coord_polar("y", start=0)
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Down_pie/pie_DPP_SH5_vs_SH2_reg_Down.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pie_SH5_vs_SH2 = DPP_SH5_vs_SH2_reg_freq_Down_mod + coord_polar("y", start=0)
 pie_SH5_vs_SH2
 coord_fixed()
 dev.off() 
 
 
 #barplot_all
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Up_barplot/barplot_DPP_SH5_reg_freq_UP_mod_all.pdf" ,width=5, height=5)      #turn this OFF if just want to see the picture in the Plots
-barplot_DPP_SH5_reg_freq_UP_mod_all = grid.arrange(DPP_LB_reg_freq_UP_mod, DPP_M9_reg_freq_UP_mod, DPP_SH2_reg_freq_UP_mod,
-                           DPP_SH5_reg_freq_UP_mod, DPP_SH5_vs_SH2_reg_freq_UP_mod, nrow = 6)
-barplot_DPP_SH5_reg_freq_UP_mod_all
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/barplot/DPP_Down_barplot/barplot_DPP_SH5_reg_freq_Down_mod_all.pdf" ,width=5, height=5)      #turn this OFF if just want to see the picture in the Plots
+barplot_DPP_SH5_reg_freq_Down_mod_all = grid.arrange(DPP_LB_reg_freq_Down_mod, DPP_M9_reg_freq_Down_mod, DPP_SH2_reg_freq_Down_mod,
+                           DPP_SH5_reg_freq_Down_mod, DPP_SH5_vs_SH2_reg_freq_Down_mod, nrow = 6)
+barplot_DPP_SH5_reg_freq_Down_mod_all
 coord_fixed()
 dev.off() 
 
 #pie_all
-pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Up_pie/pie_DPP_SH5_reg_freq_UP_mod_all.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-pie_DPP_SH5_reg_freq_UP_mod_all = grid.arrange(pie_M9, pie_SH2,
+pdf("../Figures/combined/20190110_combined/adj.P.Val/Final/geneRulations/regulators/pie/DPP_Down_pie/pie_DPP_SH5_reg_freq_Down_mod_all.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pie_DPP_SH5_reg_freq_Down_mod_all = grid.arrange(pie_M9, pie_SH2,
                        pie_SH5, pie_SH5_vs_SH2, nrow = 4)
 coord_fixed()
 dev.off() 
@@ -414,7 +414,7 @@ hist(DPP_SH5_regulators$frequency,main="Regulons affected due to del_spoVG in LB
 # library(plyr)
 # mu <- ddply(DPP_LB_regulators, "regulator", summarise, grp.mean=mean(frequency))
 # head(mu)
-# # Change histogram plot line colors by groups
+# # Change histogram plot line colors by groDowns
 # ggplot(DPP_M9_regulators, aes(x=Freq, color=regulator)) +
 #   geom_histogram(fill="white")
 # # Overlaid histograms

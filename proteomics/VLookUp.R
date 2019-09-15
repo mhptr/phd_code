@@ -29,6 +29,13 @@ setwd("~/OneDrive - University of Warwick/WORK/Results/Proteomics/FINAL Result/A
 # # write.csv(DPP_SH5_annot, "./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_minus_spoVG_upp_annot.csv", row.names = F)
 # # write.csv(DPP_SH5_vs_SH2_annot, "./combined/output/diff.exp.SIG/data/diff.exp.SIG_minus_spoVG_upp/Annotated/DPP_SH5_vs_SH2_annot_minus_spoVG_upp_annot.csv", row.names = F)
 
+#12/09/19
+
+
+
+
+
+
 
 #########################################################################################################
 ## Merge Cat2, Cat3 and Cat4 with proteomic data = 03/08/19

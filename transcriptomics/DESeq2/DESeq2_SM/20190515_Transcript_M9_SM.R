@@ -23,7 +23,7 @@ library(piano)
 library(corrplot)
 library(DESeq2)
 library(tidyr)
-
+library(EnhancedVolcano)
 
 
 ####################################################################
@@ -370,13 +370,21 @@ library(ggplot2)
 # volcano_trans("DEG_ko_vs_wt_p0.05_M9_minus_spoVG_upp.csv", "M9")
 
 
-DEG = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_SH2_minus_spoVG_upp.csv", header = T)
-rownames(DEG) = DEG$X
-DEG = DEG[,-1]
+DEG = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_M9_minus_spoVG_upp.csv", header = T)
+
+#12/09/19
+
 thr.adj.pv =0.05
-g = ggplot(data=DEG, 
-    aes(title, x=log2FoldChange, y=-log10(padj), colour=padj<0.05)) +
-  ggtitle("Volcano Plot - Transcriptomics Analysis") +      #CHANGE THE NAME HERE 
+
+g = ggplot( data = DEG, 
+  #data=diffexp.pr.all.SH2, 
+  #data=diffexp.pr.all.SH5,
+  aes(title, x=log2FoldChange, y=-log10(padj), colour= padj<0.05)) +   #colour=-log10(P.Value)
+  
+  ggtitle("Volcano Plot - M9 \nProteomic Analysis") + #CHANGE THE NAME HERE
+  #ggtitle("Volcano Plot - SH2 \nProteomic Analysis") +
+  #ggtitle("Volcano Plot - SH5 \nProteomic Analysis") +
+  
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
     axis.title.x = element_text(color="black", size=12, face="bold"),
@@ -387,18 +395,25 @@ g = ggplot(data=DEG,
   #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
   geom_point(alpha=0.4, size=1.75) +
   #ylim(c(0,23))+  xlim(c(-12,12))+   #LB, M9, SH2
-  ylim(c(0,100))+  xlim(c(-0.25,0.25))+   #SH5
+  #ylim(c(0,28))+  xlim(c(-14,14))+   #SH5
   xlab("log2 Fold Change (Del_spoVG vs WT)") + ylab("-log10 adj.P.Val")
 print(g)
 
 
 
-#https://www.bioconductor.org/packages/release/bioc/vignettes/EnhancedVolcano/inst/doc/EnhancedVolcano.html#introduction
+
+
+
+
+
+
+# https://www.bioconductor.org/packages/release/bioc/vignettes/EnhancedVolcano/inst/doc/EnhancedVolcano.html#introduction
 # if (!requireNamespace('BiocManager', quietly = TRUE))
 #   install.packages('BiocManager')
 # BiocManager::install('EnhancedVolcano')
-#devtools::install_github('kevinblighe/EnhancedVolcano')
+# devtools::install_github('kevinblighe/EnhancedVolcano')
 library(EnhancedVolcano)
+library(ggplot2)
 
 EnhancedVolcano(DEG,
                 lab = rownames(DEG),
@@ -447,14 +462,6 @@ EnhancedVolcano(DEG,
                 legendIconSize = 5.0)
 
 
-
-
-
-DEG = read.csv("../diff.exp.gene/DEG_SM/Diff_SIG_sm/Diff_SIG_minus_spoVG_upp/DEG_ko_vs_wt_p0.05_M9_minus_spoVG_upp.csv", header = T)
-rownames(DEG) = DEG$X
-DEG = DEG[,-1]
-
-
 EnhancedVolcano(DEG,
                 lab = rownames(DEG),
                 x = 'log2FoldChange',
@@ -480,6 +487,28 @@ EnhancedVolcano(DEG,
                 widthConnectors = 1.0,
                 colConnectors = 'black')
 
+
+##
+
+#https://bioconductor.org/packages/devel/bioc/vignettes/EnhancedVolcano/inst/doc/EnhancedVolcano.html#adjust-colour-and-alpha-for-point-shading
+
+DEG = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_M9_minus_spoVG_upp.csv", header = T)
+rownames(DEG) = DEG$
+DEG = DEG[,-1]
+
+
+EnhancedVolcano(DEG,
+                lab = rownames(DEG),
+                x = 'log2FoldChange',
+                y = 'padj',
+                xlim = c(-4.5, 4.5),
+                ylim = c(0, 50),
+                title = 'N061011 versus N61311',
+                pCutoff = 10e-16,
+                FCcutoff = 1.5,
+                #pointSize = c(ifelse(DEG$log2FoldChange>2, 8,1)),
+                col=c('black', 'black', 'black', 'red3'),
+                colAlpha = 1)
 
 
 
