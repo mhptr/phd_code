@@ -369,21 +369,32 @@ library(ggplot2)
 # }
 # volcano_trans("DEG_ko_vs_wt_p0.05_M9_minus_spoVG_upp.csv", "M9")
 
-
-DEG = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_M9_minus_spoVG_upp.csv", header = T)
-
-#12/09/19
+#16/09/19
 
 thr.adj.pv =0.05
 
-g = ggplot( data = DEG, 
-  #data=diffexp.pr.all.SH2, 
-  #data=diffexp.pr.all.SH5,
+DEG_M9 = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_M9_minus_spoVG_upp.csv", header = T)
+DEG_SH2 = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_SH2_minus_spoVG_upp.csv", header = T)
+DEG_SH5 = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/Diff_all_sm_minus_spoVG_upp/DEG_ko_vs_wt_all_SH5_minus_spoVG_upp.csv", header = T)
+DEG_SH5_vs_SH2 = read.csv("../diff.exp.gene/DEG_SM/Diff_all_sm/resSig.SH5_vs_SH2.csv", header = T)
+
+
+#pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+#pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_SH2.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+ # pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_SH5.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_SH5_vs_SH2.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+
+
+g = ggplot( #data = DEG_M9, 
+  #data=DEG_SH2, 
+  #data=DEG_SH5,
+  data=DEG_SH5_vs_SH2,
   aes(title, x=log2FoldChange, y=-log10(padj), colour= padj<0.05)) +   #colour=-log10(P.Value)
-  
-  ggtitle("Volcano Plot - M9 \nProteomic Analysis") + #CHANGE THE NAME HERE
-  #ggtitle("Volcano Plot - SH2 \nProteomic Analysis") +
-  #ggtitle("Volcano Plot - SH5 \nProteomic Analysis") +
+  #loge
+  #ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis") + #CHANGE THE NAME HERE
+  #ggtitle("Volcano Plot - SH2 \nTranscriptomic Analysis") +
+  #ggtitle("Volcano Plot - SH5 \nTranscriptomic Analysis") +
+  ggtitle("Volcano Plot - SH5_vs_SH2 \nTranscriptomic Analysis") +
   
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
@@ -393,14 +404,26 @@ g = ggplot( data = DEG,
   geom_hline(yintercept=-log10(thr.adj.pv), linetype="dashed", color = "red") +
   #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
   #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
-  geom_point(alpha=0.4, size=1.75) +
-  #ylim(c(0,23))+  xlim(c(-12,12))+   #LB, M9, SH2
-  #ylim(c(0,28))+  xlim(c(-14,14))+   #SH5
+  geom_point(alpha=0.4, size=3) +
+  #ylim(c(0,75))+  xlim(c(-4,4))+   #M9
+  #ylim(c(0,30))+  xlim(c(-10,10))+   #SH2
+  ylim(c(0,300))+  xlim(c(-20,20))+   #SH5
   xlab("log2 Fold Change (Del_spoVG vs WT)") + ylab("-log10 adj.P.Val")
 print(g)
+coord_fixed()
+dev.off()
 
 
 
+
+
+
+
+
+###################################  ALL GOOD SO FAR  ################################### 
+###################################  ALL GOOD SO FAR  ################################### 
+###################################  ALL GOOD SO FAR  ################################### 
+###################################  ALL GOOD SO FAR  ################################### 
 
 
 
@@ -434,7 +457,7 @@ EnhancedVolcano(DEG,
                 xlim = c(-6, 6),
                 ylim = c(0,77),
                 title = 'Volcano Plot - Transcriptomics Analysis',
-                pCutoff = 10e-16,
+                pCutoff = ds,
                 FCcutoff = 1.5,
                 transcriptPointSize = 1.5,
                 transcriptLabSize = 3.0,
