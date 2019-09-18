@@ -413,7 +413,148 @@ print(g)
 coord_fixed()
 dev.off()
 
+#17/09/19
 
+#padj < 0.01
+thr.adj.pv = 0.01
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9_padj_0.01.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot( data = DEG_M9, 
+  aes(title, x=log2FoldChange, y=-log10(padj), colour= padj<0.01)) +   #colour=-log10(P.Value)
+  #loge
+  ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis - padj < 0.01") + #CHANGE THE NAME HERE
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold") 
+  ) + 
+  geom_hline(yintercept=-log10(thr.adj.pv), linetype="dashed", color = "red") +
+  #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
+  #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
+  geom_point(alpha=0.4, size=3) +
+  ylim(c(0,75))+  xlim(c(-4,4))+   #M9
+  xlab("log2 Fold Change (del spoVG vs WT)") + ylab("-log10 padj")
+print(g)
+coord_fixed()
+dev.off()
+
+
+#padj < 0.001
+thr.adj.pv = 0.001
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9_padj_0.001.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot( data = DEG_M9, 
+            aes(title, x=log2FoldChange, y=-log10(padj), colour= padj<0.001)) +   #colour=-log10(P.Value)
+  #loge
+  ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis - padj < 0.001") + #CHANGE THE NAME HERE
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold") 
+  ) + 
+  geom_hline(yintercept=-log10(thr.adj.pv), linetype="dashed", color = "red") +
+  #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
+  #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
+  geom_point(alpha=0.4, size=3) +
+  ylim(c(0,75))+  xlim(c(-4,4))+   #M9
+  xlab("log2 Fold Change (del spoVG vs WT)") + ylab("-log10 padj")
+print(g)
+coord_fixed()
+dev.off()
+
+
+#padj < 0.00001
+thr.adj.pv = 0.00001
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9_padj_0.00001.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot( data = DEG_M9, 
+            aes(title, x=log2FoldChange, y=-log10(padj), colour= padj<0.00001)) +   #colour=-log10(P.Value)
+  #loge
+  ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis - padj < 0.00001") + #CHANGE THE NAME HERE
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold") 
+  ) + 
+  geom_hline(yintercept=-log10(thr.adj.pv), linetype="dashed", color = "red") +
+  #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
+  #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
+  geom_point(alpha=0.4, size=3) +
+  ylim(c(0,75))+  xlim(c(-4,4))+   #M9
+  xlab("log2 Fold Change (del spoVG vs WT)") + ylab("-log10 padj")
+print(g)
+coord_fixed()
+dev.off()
+
+
+#10e-16
+
+thr.adj.pv = 10e-16
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9_padj_10e-16.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot( data = DEG_M9, 
+            aes(title, x=log2FoldChange, y=-log10(padj), colour= padj<10e-16)) +   #colour=-log10(adj. P.Value)
+  #loge
+  ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis - padj < 10e-16") + #CHANGE THE NAME HERE
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold") 
+  ) + 
+  geom_hline(yintercept=-log10(thr.adj.pv), linetype="dashed", color = "red") +
+  #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
+  #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
+  geom_point(alpha=0.4, size=3) +
+  ylim(c(0,75))+  xlim(c(-4,4))+   #M9
+  xlab("log2 Fold Change (del spoVG vs WT)") + ylab("-log10 padj")
+print(g)
+coord_fixed()
+dev.off()
+
+#log e
+#10e-16
+
+thr.adj.pv = 10e-16
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9_padj_10e-16_loge.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot( data = DEG_M9, 
+            aes(title, x=log2FoldChange, y=-log(padj, base = exp(1)), colour= padj<10e-16)) +   #colour=-log10(adj. P.Value)
+  #loge
+  ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis - padj < 10e-16") + #CHANGE THE NAME HERE
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold") 
+  ) + 
+  geom_hline(yintercept=-log(thr.adj.pv, base = exp(1)), linetype="dashed", color = "red") +
+  #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
+  #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
+  geom_point(alpha=0.4, size=3) +
+  ylim(c(0,75))+  xlim(c(-4,4))+   #M9
+  xlab("log2 Fold Change (del spoVG vs WT)") + ylab("-log10 padj")
+print(g)
+coord_fixed()
+dev.off()
+
+
+#log e
+#10e-12
+
+thr.adj.pv = 10e-12
+pdf("../diff.exp.gene/DEG_SM/Figures/volcano_plots/DEG_volcano_M9_padj_10e-12_loge.pdf" ,width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot( data = DEG_M9, 
+            aes(title, x=log2FoldChange, y=-log(padj, base = exp(1)), colour= padj<10e-12)) +   #colour=-log10(adj. P.Value)
+  #loge
+  ggtitle("Volcano Plot - M9 \nTranscriptomic Analysis - padj < 10e-12, log e") + #CHANGE THE NAME HERE
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold") 
+  ) + 
+  geom_hline(yintercept=-log(thr.adj.pv, base = exp(1)), linetype="dashed", color = "red") +
+  #geom_vline(xintercept=-log2(thr.fc), linetype="dashed", color = "red") +  #thr.fc is 2
+  #geom_vline(xintercept=log2(thr.fc), linetype="dashed", color = "red") +
+  geom_point(alpha=0.4, size=3) +
+  ylim(c(0, 180))+  xlim(c(-10,10))+   #M9
+  xlab("log2 Fold Change (del spoVG vs WT)") + ylab("-log10 padj")
+print(g)
+coord_fixed()
+dev.off()
 
 
 

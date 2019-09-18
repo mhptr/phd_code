@@ -841,6 +841,10 @@ regulations2 = regulations[!as.character(regulations$regulator.locus.tag)==as.ch
 ###############################
 
 
+diffexp.pr.all.LB = read.csv("./Analysis - R-Script /Data/combined/output/diff.exp./diff.exp._minus_spoVG_upp/20190514_diffexp.pr.all_LB_minus_spoVG_upp.csv", header = T)
+rownames(diffexp.pr.all.LB) = diffexp.pr.all.LB$X
+diffexp.pr.all.LB = diffexp.pr.all.LB[,-1]
+  
 
 regulations2.U = regulations2[regulations2$regulator.locus.tag%in%rownames(diffexp.pr.all.LB)[diffexp.pr.all.LB$adj.P.Val<0.05] | 
                                  regulations2$locus.tag%in%rownames(diffexp.pr.all.LB)[diffexp.pr.all.LB$adj.P.Val<0.05], ]
@@ -872,6 +876,7 @@ colnames(degree.U) = "Degree"
 
 regulations2.LB = regulations2[regulations2$regulator.locus.tag%in%rownames(diffexp.pr.all.LB)[diffexp.pr.all.LB$adj.P.Val<0.05] | 
   regulations2$locus.tag%in%rownames(diffexp.pr.all.LB)[diffexp.pr.all.LB$adj.P.Val<0.05], ]
+
 g.LB = graph.data.frame(cbind(as.character(regulations2.LB$regulator.locus.tag),
                             as.character(regulations2.LB$locus.tag)), directed=T)  #no direction decided at this step
 
@@ -919,9 +924,24 @@ title("Regulatory Networks in LB - Proteomics",cex.main=1,col.main="black")
 
 
 #Done with Tauqeer
-#plot(g.LB,vertex.size=3,vertex.frame.color=NA,vertex.label.dist=0.5, edge.arrow.size=0,
-#       mark.border="grey",pch=19,vertex.label=NA)    #check pch 
+# plot(g.LB,vertex.size=3,vertex.frame.color=NA,vertex.label.dist=0.5, edge.arrow.size=0,
+#       mark.border="grey",pch=19,vertex.label=NA)    #check pch
 
+
+#Self exploratory 17/Sep/19
+plot(g.LB,vertex.frame.color=,vertex.label.dist=0.5, edge.arrow.size=0.4, 
+     mark.border="red",pch=19,vertex.label=degree.LB$Degree, #rownames(degree.LB[(degree.LB$Degree)>10 ,]) = gives BSU numbers in the name 
+     xlim=c(-0.8,0.8), ylim = c(-0.5,1.5),
+     #vertex.color=colorRampPalette(c("white", "red")) (10),
+     vertex.color=degree.U$Degree,        #gives multiple colours 
+     #vertex.color=dim(degree.U),  #gives two colours : orange and blue
+     vertex.label.color="black", vertex.label.dist=1.5,
+     #vertex.shape=diffexp.pr.all.LB_SIG$P.Value,
+     vertex.shape="circle",  #how to set two shapes for two kinds of expression data
+     vertex.size=(2.3)*(degree.LB$Degree), 
+     scale=degree.LB$Degree)    #check pch #[degree.LB$Degree<300 = 800,]
+#how to make the size of each each in a certain margin length eg all value >20 =20
+title("Regulatory Networks in LB - Proteomics",cex.main=1,col.main="black")
 
 
 
