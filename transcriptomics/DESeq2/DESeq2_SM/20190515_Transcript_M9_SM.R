@@ -63,76 +63,19 @@ counts.all_SM_SH5 = counts.all[,13:18]
 
 #crude heatMap 
 
-pheatmap(#counts.all, 
-  counts.all_SM_M9,
-  #counts.all_SM_SH2,
-  #counts.all_SM_SH5,
-  scale="row",
-  cluster_rows=F, cluster_cols=T,
-  show_rownames = F, show_colnames = T, 
-  fontsize=10, legend=TRUE,
-  #main = "HeatMap \nTotal Read Counts - All\nTranscriptomic"
-  main = "HeatMap \nTotal Read Counts - M9\nTranscriptomic"
-  #main = "HeatMap \nTotal Read Counts - SH2\nTranscriptomic"
-  #main = "HeatMap \nTotal Read Counts - SH5\nTranscriptomic"
-)
-
-
-####################################################################
-###4.PCA Analysis  
-####################################################################
-
-
-######################################
-### 4.1 PCA - All
-######################################
-
-pca = prcomp(t(counts.all), center = TRUE, scale = FALSE)
-percent.var = round(100*pca$sdev^2/sum(pca$sdev^2))
-pca2 = cbind(as.data.frame(pca$x), sampleTable)   #check the order of ko and WT
-
-#write.csv(pca2, "./Combined /Filtered /CSV/20181217_PCA_Combined.csv")
-
-#pdf("../Figures/LB/PCA_Plot_LB.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-ggplot(pca2, aes(PC1, PC2, colour=pca2$genotype,shape=pca2$media)) + geom_point(size=3) + 
-  xlab(paste0("PC1: ",percent.var[1],"% variance")) +
-  ylab(paste0("PC2: ",percent.var[2], "% variance")) +
-  labs(colour = "Genotype",shape="Media") +
-  ggtitle("PCA Plot - All Conditions \nTranscriptomic Analysis - Raw Data") + #CHANGE THE NAME HERE 
-  theme(
-    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
-    axis.title.x = element_text(color="black", size=12, face="bold"),
-    axis.title.y = element_text(color="black", size=12, face="bold")
-  ) + 
-  #geom_text(aes(PC1, PC2, colour=conditions),label=pca2$genotype) +    #adds labels to each data point
-  coord_fixed()
-#dev.off()                  #turn this OFF if just want to see the picture in the Plots
-
-
-
-
-################################################################
-#4.2 PCA - Conditionwise - M9 
-################################################################
-
-pca = prcomp(t(counts.all_SM_M9), center = TRUE, scale = FALSE)
-percent.var = round(100*pca$sdev^2/sum(pca$sdev^2))
-pca2 = cbind(as.data.frame(pca$x), sampleTable_SM_M9)   #check the order of ko and WT
-
-#pdf("../Figures/LB/PCA_Plot_LB.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-ggplot(pca2, aes(PC1, PC2, colour=pca2$genotype)) + geom_point(size=3) + 
-  xlab(paste0("PC1: ",percent.var[1],"% variance")) +
-  ylab(paste0("PC2: ",percent.var[2], "% variance")) + 
-  labs(colour = "Genotype",shape="Media") +
-  ggtitle("PCA Plot - M9 \nTranscriptomic Analysis - Raw Data") + #CHANGE THE NAME HERE
-  theme(
-    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
-    axis.title.x = element_text(color="black", size=12, face="bold"),
-    axis.title.y = element_text(color="black", size=12, face="bold")
-  ) + 
-  #geom_text(aes(PC1, PC2, colour=genotype),label=pca2$genotype) +    #adds labels to each data point
-  coord_fixed()
-#dev.off()                  #turn this OFF if just want to see the picture in the Plots
+# pheatmap(#counts.all, 
+#   counts.all_SM_M9,
+#   #counts.all_SM_SH2,
+#   #counts.all_SM_SH5,
+#   scale="row",
+#   cluster_rows=F, cluster_cols=T,
+#   show_rownames = F, show_colnames = T, 
+#   fontsize=10, legend=TRUE,
+#   #main = "HeatMap \nTotal Read Counts - All\nTranscriptomic"
+#   main = "HeatMap \nTotal Read Counts - M9\nTranscriptomic"
+#   #main = "HeatMap \nTotal Read Counts - SH2\nTranscriptomic"
+#   #main = "HeatMap \nTotal Read Counts - SH5\nTranscriptomic"
+# )
 
 
 
@@ -284,6 +227,112 @@ resSig.M9.01 <- subset(resOrdered.M9, padj < 0.01)  #Exporting only the results 
 resSig.M9.01
 #write.csv(as.data.frame(resSig.M9.01), 
 #          file="DEG_ko_vs_wt_p0.01_M9_sm.csv")
+
+
+
+################################################################
+# #Data transformations and visualization
+################################################################
+
+################################################################
+###### Extracting transformed values
+################################################################
+
+vsd.M9 <- vst(dds.M9, blind=FALSE)
+rld.M9 <- rlog(dds.M9, blind=FALSE)
+head(assay(vsd.M9), 3)
+
+# PCA
+
+pcaData_M9 <- plotPCA(vsd.M9, intgroup=c("media", "genotype"), returnData=TRUE)
+percentVar_M9 <- round(100 * attr(pcaData_M9, "percentVar"))
+pdf("../diff.exp.gene/DEG_SM/Figures/PCA/M9/PCA_DEG_vsd_M9.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot(pcaData_M9, aes(PC1, PC2, color=genotype, shape=media)) + geom_point(size=3) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar_M9[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar_M9[2],"% variance")) + 
+  ggtitle("PCA Plot \nTranscriptomic Analysis (vsd) - M9") +
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold")
+  ) + 
+  coord_fixed()
+dev.off() 
+plot(g)
+
+
+
+
+# ####################################################################
+# ###4.PCA Analysis  
+# ####################################################################
+# 
+# 
+# ######################################
+# ### 4.1 PCA - All
+# ######################################
+# 
+# pca = prcomp(t(counts.all), center = TRUE, scale = FALSE)
+# percent.var = round(100*pca$sdev^2/sum(pca$sdev^2))
+# pca2 = cbind(as.data.frame(pca$x), sampleTable)   #check the order of ko and WT
+# 
+# pdf("../diff.exp.gene/DEG_SM/Figures/PCA/PCA_DEG_All.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+# g = ggplot(pca2, aes(PC1, PC2, colour=pca2$genotype,shape=pca2$media)) + geom_point(size=3) + 
+#   xlab(paste0("PC1: ",percent.var[1],"% variance")) +
+#   ylab(paste0("PC2: ",percent.var[2], "% variance")) +
+#   labs(colour = "Genotype",shape="Media") +
+#   ggtitle("PCA Plot - All Conditions \nTranscriptomic Analysis - Raw Data") + #CHANGE THE NAME HERE 
+#   theme(
+#     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+#     axis.title.x = element_text(color="black", size=12, face="bold"),
+#     axis.title.y = element_text(color="black", size=12, face="bold")
+#   ) + 
+#   #geom_text(aes(PC1, PC2, colour=conditions),label=pca2$genotype) +    #adds labels to each data point
+#   coord_fixed()
+# dev.off()                  #turn this OFF if just want to see the picture in the Plots
+# 
+# plot(g)
+# 
+# 
+# ################################################################
+# #4.2 PCA - Conditionwise - M9 
+# ################################################################
+# 
+# pca = prcomp(t(counts.all_SM_M9), center = TRUE, scale = FALSE)
+# percent.var = round(100*pca$sdev^2/sum(pca$sdev^2))
+# pca2 = cbind(as.data.frame(pca$x), sampleTable_SM_M9)   #check the order of ko and WT
+# 
+# pdf("../diff.exp.gene/DEG_SM/Figures/PCA/M9/PCA_DEG_M9.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+# g = ggplot(pca2, aes(PC1, PC2, colour=pca2$genotype)) + geom_point(size=3) + 
+#   xlab(paste0("PC1: ",percent.var[1],"% variance")) +
+#   ylab(paste0("PC2: ",percent.var[2], "% variance")) + 
+#   labs(colour = "Genotype",shape="Media") +
+#   ggtitle("PCA Plot - M9 \nTranscriptomic Analysis - Raw Data") + #CHANGE THE NAME HERE
+#   theme(
+#     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+#     axis.title.x = element_text(color="black", size=12, face="bold"),
+#     axis.title.y = element_text(color="black", size=12, face="bold")
+#   ) + 
+#   #geom_text(aes(PC1, PC2, colour=genotype),label=pca2$genotype) +    #adds labels to each data point
+#   coord_fixed()
+# dev.off()                  #turn this OFF if just want to see the picture in the Plots
+# 
+# plot(g)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1307,5 +1356,28 @@ pheatmap(gsea.cat4.enrich.sig.pv.log10,color = colorRampPalette(c("white", "blue
          main = "GSEA SubtiWiki Category 4 \n(padj) - Transcriptomics",
          annotation_row = annotation.cat4.cat1
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+gff_annot = read.csv("../filt_txt_all_2/counts.all_genes_SM.csv",header=T)
+counts_SM = read.csv("../filt_txt_all_2/counts.all_SM_S1583.csv",header=T)
+counts_SM_annot = merge(counts_SM, gff_annot,by.x="X",by.y="X",all.x=TRUE)
+rownames(counts_SM_annot)=counts_SM_annot$X
+counts_SM_annot=counts_SM_annot[,-c(21:32)]
+write.csv(counts_SM_annot, "../filt_txt_all_2/counts.all_annot_SM.csv", row.names = F)
+
 
 
