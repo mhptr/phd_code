@@ -46,9 +46,9 @@ swati.color.Blues = c(brewer.pal(8,"Blues"))
 
 #Reading SampleTable
 sampleTable = read.csv("./sampleTable_SM.csv", header = T)
-sampleTable_SM_M9 = sampleTable[1:6,]
-sampleTable_SM_SH2 = sampleTable[7:12,]
-sampleTable_SM_SH5 = sampleTable[13:18,]
+# sampleTable_SM_M9 = sampleTable[1:6,]
+# sampleTable_SM_SH2 = sampleTable[7:12,]
+# sampleTable_SM_SH5 = sampleTable[13:18,]
 
 #Reading Combined Read Counts 
 counts.all = read.csv("./counts.all_SM_S1583.csv", header = T) #change it 
@@ -56,9 +56,9 @@ rownames(counts.all) = counts.all$X
 counts.all = counts.all[,-1]
 colnames(counts.all) = gsub(".txt","",colnames(counts.all))
 colnames(counts.all) = sampleTable$sampleName
-counts.all_SM_M9 = counts.all[,1:6]
-counts.all_SM_SH2 = counts.all[,7:12]
-counts.all_SM_SH5 = counts.all[,13:18]
+# counts.all_SM_M9 = counts.all[,1:6]
+# counts.all_SM_SH2 = counts.all[,7:12]
+# counts.all_SM_SH5 = counts.all[,13:18]
 
 
 #crude heatMap 
@@ -84,56 +84,74 @@ counts.all_SM_SH5 = counts.all[,13:18]
 #5. DESeq2 - Count matrix input
 ################################################################
 
-cts.M9 = counts.all_SM_M9
-##  Note: 
-#In order to benefit from the default settings of the package, 
-#you should put the variable of interest at the end of the formula and make sure the control level is the first level.
-cts.M9 = cts.M9[,cbind( "S_M9_W1", "S_M9_W2", "S_M9_W3",
-                        "S_M9_DEL1", "S_M9_DEL2", "S_M9_DEL3")]
-colData.M9 = sampleTable_SM_M9    #Match order with column order of cts.M9
+cts = counts.all
+
+# cts.M9 = counts.all_SM_M9
+# ##  Note: 
+# #In order to benefit from the default settings of the package, 
+# #you should put the variable of interest at the end of the formula and make sure the control level is the first level.
+# cts.M9 = cts.M9[,cbind( "S_M9_W1", "S_M9_W2", "S_M9_W3",
+#                         "S_M9_DEL1", "S_M9_DEL2", "S_M9_DEL3")]
+# colData.M9 = sampleTable_SM_M9    #Match order with column order of cts.M9
+
+
+colData = sampleTable
 
 
 #It is absolutely critical that the columns of the count matrix and the rows of the column data (information about samples) are in the same order. 
-rownames(colData.M9) = colData.M9$sampleName
+# rownames(colData.M9) = colData.M9$sampleName
+# 
+# all(rownames(colData.M9) %in% colnames(cts.M9)) # should be TRUE
+# all(rownames(colData.M9) == colnames(cts.M9)) # should be FALSE  
+# cts.M9 <- cts.M9[, rownames(colData.M9)]
+# all(rownames(colData.M9) == colnames(cts.M9)) # should be TRUE
+# 
+# library("DESeq2")
+# dds.M9 <- DESeqDataSetFromMatrix(countData = cts.M9,
+#                                  colData = colData.M9,
+#                                  design = ~ genotype)
+# dds.M9
 
-all(rownames(colData.M9) %in% colnames(cts.M9)) # should be TRUE
-all(rownames(colData.M9) == colnames(cts.M9)) # should be FALSE  
-cts.M9 <- cts.M9[, rownames(colData.M9)]
-all(rownames(colData.M9) == colnames(cts.M9)) # should be TRUE
+
+rownames(colData) = colData$sampleName
+
+all(rownames(colData) %in% colnames(cts)) # should be TRUE
+all(rownames(colData) == colnames(cts)) # should be FALSE  
+cts <- cts[, rownames(colData)]
+all(rownames(colData) == colnames(cts)) # should be TRUE
 
 library("DESeq2")
-dds.M9 <- DESeqDataSetFromMatrix(countData = cts.M9,
-                                 colData = colData.M9,
+dds <- DESeqDataSetFromMatrix(countData = cts,
+                                 colData = colData,
                                  design = ~ genotype)
-dds.M9
-
+dds
 
 ################################################################
 #5. DESeq2 - Pre-filtering
 ################################################################
 
-keep.M9 = rowSums(counts(dds.M9)) >= 20
-dds.M9 = dds.M9[keep.M9,]
+keep = rowSums(counts(dds)) >= 20
+dds = dds[keep,]
 
 
 #### Define factor levels
 
 # Method 1 - Using Factor
-#dds.M9$genotype <- factor(dds.M9$genotype, levels = c("wt","ko"))
+#dds$genotype <- factor(dds$genotype, levels = c("wt","ko"))
 
 ### OR ###
 
 # Method 2 - Using relevel
-dds.M9$genotype = relevel(dds.M9$genotype, ref = "wt")
+dds$genotype = relevel(dds$genotype, ref = "wt")
 
 
 ################################################################
 #5. DESeq2 - Differential expression analysis
 ################################################################
 
-dds.M9 <- DESeq(dds.M9)      # DESeq is DONE at this step!! 
-res.M9 <- results(dds.M9)
-res.M9                    ## WORKS! ko vs wt = i.e., condition treated vs untreated
+dds <- DESeq(dds)      # DESeq is DONE at this step!! 
+res <- results(dds)
+res                    ## WORKS! ko vs wt = i.e., condition treated vs untreated
 
 #log2 fold change (MLE): genotype ko vs wt 
 #Wald test p-value: genotype ko vs wt 
@@ -144,9 +162,9 @@ res.M9                    ## WORKS! ko vs wt = i.e., condition treated vs untrea
 # Log fold change shrinkage for visualization and ranking
 ################################################################
 
-resultsNames(dds.M9)
-resLFC.M9 <- lfcShrink(dds.M9, coef="genotype_ko_vs_wt", type="apeglm") #apeglm method for effect size shrinkage
-resLFC.M9
+resultsNames(dds)
+resLFC <- lfcShrink(dds, coef="genotype_ko_vs_wt", type="apeglm") #apeglm method for effect size shrinkage
+resLFC
 
 
 
@@ -155,23 +173,12 @@ resLFC.M9
 ################################################################
 
 
-resOrdered.M9 <- res.M9[order(res.M9$padj),]
-summary(res.M9)
-sum(res.M9$padj < 0.1, na.rm=TRUE) #How many adjusted p-values were less than 0.1?
-
-res05 <- results(dds.M9, alpha=0.05) ## adjusted p-value < 0.05
+resOrdered <- res[order(res$pvalue),]
+summary(res)
+sum(res$padj < 0.1, na.rm=TRUE) #How many adjusted p-values were less than 0.1?
+res05 <- results(dds, alpha=0.05) ## adjusted p-value < 0.05
 summary(res05)
 sum(res05$padj < 0.05, na.rm=TRUE)
-
-resLFC.M9_padj_05 = resLFC.M9[order(resLFC.M9$padj),]
-summary(resLFC.M9_padj_05)
-summary(resLFC.M9_padj_05$padj < 0.05, na.rm=TRUE)
-
-
-
-
-
-
 
 
 ################################################################
@@ -179,29 +186,12 @@ summary(resLFC.M9_padj_05$padj < 0.05, na.rm=TRUE)
 ################################################################
 
 ##Points which fall out of the window are plotted as open triangles pointing either up or down.
-# plotMA(res05, ylim=c(-2,2)) #Points will be colored red if the adjusted p value is less than 0.1
-# plotMA(resOrdered.M9, ylim=c(-2,2))
-# 
-# ##It is more useful visualize the MA-plot for the shrunken log2 fold changes, which remove the noise associated with log2 fold changes from low count genes without requiring arbitrary filtering thresholds.
-# plotMA(resLFC.M9, ylim=c(-2,2))
-plotMA(resLFC.M9_padj_05, ylim = c(-2,2))
+plotMA(res, ylim=c(-2,2)) #Points will be colored red if the adjusted p value is less than 0.1
+##It is more useful visualize the MA-plot for the shrunken log2 fold changes, which remove the noise associated with log2 fold changes from low count genes without requiring arbitrary filtering thresholds.
+plotMA(resLFC, ylim=c(-2,2))
 #After calling plotMA, one can use the function identify to interactively detect the row number of individual genes by clicking on the plot. One can then recover the gene identifiers by saving the resulting indices:
-#idx.M9 <- identify(res.M9$baseMean, res.M9$log2FoldChange)
-#rownames(res.M9)[idx.M9]  # Doesn't end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#idx <- identify(res$baseMean, res$log2FoldChange)
+#rownames(res)[idx]  # Doesn't end
 
 
 
@@ -209,11 +199,11 @@ plotMA(resLFC.M9_padj_05, ylim = c(-2,2))
 # Plot counts
 ################################################################
 
-plotCounts(dds.M9, gene=which.min(res.M9$padj), intgroup="genotype")
-d.M9 <- plotCounts(dds.M9, gene=which.min(res.M9$padj), intgroup="genotype", 
+plotCounts(dds, gene=which.min(res$padj), intgroup="genotype")
+d <- plotCounts(dds, gene=which.min(res$padj), intgroup="genotype", 
                    returnData=TRUE)
 library("ggplot2")
-ggplot(d.M9, aes(x=genotype, y=count)) + 
+ggplot(d, aes(x=genotype, y=count)) + 
   geom_point(position=position_jitter(w=0.1,h=0)) + 
   scale_y_log10(breaks=c(25,100,400))
 
@@ -223,7 +213,7 @@ ggplot(d.M9, aes(x=genotype, y=count)) +
 # More information on results columns
 ################################################################
 
-mcols(res.M9)$description
+mcols(res)$description
 
 
 
@@ -243,17 +233,17 @@ mcols(res.M9)$description
 
 ##write.csv(as.data.frame(resOrdered), 
 ##          file="DEG_ko_vs_wt_M9_sm.csv")         #prints all the differentially expressed genes
-#resSig.M9
+#resSig
 
-resSig.M9 = subset(resOrdered.M9)
-#write.csv(resSig.M9, "../diff.exp.gene/DEG_SM/Diff_all_sm/DEG_ko_vs_wt_all_M9_sm.csv")
+resSig = subset(resOrdered)
+#write.csv(resSig, "../diff.exp.gene/DEG_SM/Diff_all_sm/DEG_ko_vs_wt_all_M9_sm.csv")
 
-resSig.M9.05 <- subset(resOrdered.M9, padj < 0.05)  #Exporting only the results which pass an adjusted p value threshold can be accomplished with the subset function, followed by the write.csv function.
-#write.csv(as.data.frame(resSig.M9.05), 
+resSig.05 <- subset(resOrdered, padj < 0.05)  #Exporting only the results which pass an adjusted p value threshold can be accomplished with the subset function, followed by the write.csv function.
+#write.csv(as.data.frame(resSig.05), 
 #          file="DEG_ko_vs_wt_p0.05_M9_sm.csv") #Exporting only the results which pass an adjusted p value threshold can be accomplished with the subset function, followed by the write.csv function.
-resSig.M9.01 <- subset(resOrdered.M9, padj < 0.01)  #Exporting only the results which pass an adjusted p value threshold can be accomplished with the subset function, followed by the write.csv function.
-resSig.M9.01
-#write.csv(as.data.frame(resSig.M9.01), 
+resSig.01 <- subset(resOrdered, padj < 0.01)  #Exporting only the results which pass an adjusted p value threshold can be accomplished with the subset function, followed by the write.csv function.
+resSig.01
+#write.csv(as.data.frame(resSig.01), 
 #          file="DEG_ko_vs_wt_p0.01_M9_sm.csv")
 
 
@@ -266,20 +256,60 @@ resSig.M9.01
 ###### Extracting transformed values
 ################################################################
 
-vsd.M9 <- vst(dds.M9, blind=FALSE)
-rld.M9 <- rlog(dds.M9, blind=FALSE)
-head(assay(vsd.M9), 3)
+vsd <- vst(dds, blind=FALSE)
+rld <- rlog(dds, blind=FALSE)
+head(assay(vsd), 3)
+
+
+#############################################
+## HEATMAPS - ALL - 04 Feb 2020
+#############################################
+
+library("pheatmap")
+
+###############
+# heatmap of count matrix 
+###############
+
+select <- order(rowMeans(counts(dds,normalized=TRUE)),
+                decreasing=TRUE)[1:50]
+df <- as.data.frame(colData(dds)[,c("genotype","media")])
+pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=TRUE,
+         cluster_cols=FALSE, annotation_col=df)
+
+###############
+#Heatmap of the sample-to-sample distances
+###############
+
+sampleDists <- dist(t(assay(vsd)))
+library("RColorBrewer")
+sampleDistMatrix <- as.matrix(sampleDists)
+rownames(sampleDistMatrix) <- paste(vsd$genotype, vsd$media, sep="-")
+colnames(sampleDistMatrix) <- TRUE
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+pheatmap(sampleDistMatrix,
+         clustering_distance_rows=sampleDists,
+         clustering_distance_cols=sampleDists,
+         col=colors)
+
+
+#Principal component plot of the samples
+
+
+
+
+
 
 # PCA
 
-pcaData_M9 <- plotPCA(vsd.M9, intgroup=c("media", "genotype"), returnData=TRUE)
-percentVar_M9 <- round(100 * attr(pcaData_M9, "percentVar"))
-pdf("../diff.exp.gene/DEG_SM/Figures/PCA/M9/PCA_DEG_vsd_M9.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
-g = ggplot(pcaData_M9, aes(PC1, PC2, color=genotype, shape=media)) + geom_point(size=3) +
+pcaData <- plotPCA(vsd, intgroup=c("media", "genotype"), returnData=TRUE)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+pdf("../diff.exp.gene/DEG_SM/Figures/PCA/M9/PCA_DEG_vsd_ALL.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot(pcaData, aes(PC1, PC2, color=genotype, shape=media)) + geom_point(size=3) +
   geom_point(size=3) +
-  xlab(paste0("PC1: ",percentVar_M9[1],"% variance")) +
-  ylab(paste0("PC2: ",percentVar_M9[2],"% variance")) + 
-  ggtitle("PCA Plot \nTranscriptomic Analysis (vsd) - M9") +
+  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
+  ggtitle("PCA Plot \nTranscriptomic Analysis (vsd) - All") +
   theme(
     plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
     axis.title.x = element_text(color="black", size=12, face="bold"),
@@ -290,24 +320,6 @@ dev.off()
 plot(g)
 
 
-#04Feb2020
-####################################################################
-#Rich visualization and reporting of results
-#################################################################### 
-#pcaExplorer
-#http://bioconductor.org/packages/release/bioc/html/pcaExplorer.html
-
-#Installation
-#To install this package, start R (version "3.6") and enter:
-  
-#   if (!requireNamespace("BiocManager", quietly = TRUE))
-#     install.packages("BiocManager")
-# 
-# BiocManager::install("pcaExplorer")
-
-# library(pcaExplorer)
-# pcaExplorer(dds = dds.M9, dst = NULL, countmatrix = counts.all_SM_M9,
-#             coldata = colData.M9, pca2go = NULL, annotation = NULL)
 
 
 # ####################################################################
@@ -367,34 +379,14 @@ plot(g)
 # plot(g)
 
 
-## HEATMAPS
-
-# heatmap of count matrix 
-
-library("pheatmap")
-
-# M9
-select <- order(rowMeans(counts(dds.M9,normalized=TRUE)),
-                decreasing=TRUE)[1:25]
-df <- as.data.frame(colData(dds.M9)[,c("genotype","media")])
-pheatmap(assay(vsd.M9)[select,], cluster_rows=FALSE, show_rownames=TRUE,
-         cluster_cols=FALSE, annotation_col=df)
-
-#Heatmap of the sample-to-sample distances
-
-sampleDists <- dist(t(assay(vsd.M9)))
-library("RColorBrewer")
-sampleDistMatrix <- as.matrix(sampleDists)
-  rownames(sampleDistMatrix) <- paste(vsd.M9$genotype, vsd.M9$media, sep="-")
-colnames(sampleDistMatrix) <- NULL
-colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
-pheatmap(sampleDistMatrix,
-         clustering_distance_rows=sampleDists,
-         clustering_distance_cols=sampleDists,
-         col=colors)
 
 
-#Principal component plot of the samples
+
+
+
+
+
+
 
 
 
@@ -408,15 +400,15 @@ pheatmap(sampleDistMatrix,
 ##########################################################
 
 
-resSig.M9.05 = read.csv("../diff.exp.gene/DEG_SM/Diff_SIG_sm/Diff_SIG_minus_spoVG_upp/DEG_ko_vs_wt_p0.05_M9_minus_spoVG_upp.csv", header = T)
-rownames(resSig.M9.05) = resSig.M9.05$X
+resSig.05 = read.csv("../diff.exp.gene/DEG_SM/Diff_SIG_sm/Diff_SIG_minus_spoVG_upp/DEG_ko_vs_wt_p0.05_M9_minus_spoVG_upp.csv", header = T)
+rownames(resSig.05) = resSig.05$X
 resSig.SH2.05 = read.csv("../diff.exp.gene/DEG_SM/Diff_SIG_sm/Diff_SIG_minus_spoVG_upp/DEG_ko_vs_wt_p0.05_SH2_minus_spoVG_upp.csv", header = T)
 rownames(resSig.SH2.05) = resSig.SH2.05$X
 resSig.SH5.05 = read.csv("../diff.exp.gene/DEG_SM/Diff_SIG_sm/Diff_SIG_minus_spoVG_upp/DEG_ko_vs_wt_p0.05_SH5_minus_spoVG_upp.csv", header = T)
 rownames(resSig.SH5.05) = resSig.SH5.05$X
 
 venn.plot = venn.diagram(
-  list("M9_Transcriptomic" = rownames(resSig.M9.05),
+  list("M9_Transcriptomic" = rownames(resSig.05),
        "SH2_Transcriptomic" = rownames(resSig.SH2.05),
        "SH5_Transcriptomic" = rownames(resSig.SH5.05)),
   filename = NULL,
@@ -437,7 +429,7 @@ library(reshape)
 library(R.utils)
 
 ## data
-M9_Transcriptomic = data.frame("M9_Transcriptomic" = rownames(resSig.M9.05), "M9_Transcriptomic" = 1)
+M9_Transcriptomic = data.frame("M9_Transcriptomic" = rownames(resSig.05), "M9_Transcriptomic" = 1)
 SH2_Transcriptomic = data.frame("SH2_Transcriptomic" = rownames(resSig.SH2.05), "SH2_Transcriptomic" = 1)
 SH5_Transcriptomic = data.frame("SH5_Transcriptomic" = rownames(resSig.SH5.05), "SH5_Transcriptomic" = 1)
 
@@ -1443,7 +1435,7 @@ counts_SM = read.csv("../filt_txt_all_2/counts.all_SM_S1583.csv",header=T)
 counts_SM_annot = merge(counts_SM, gff_annot,by.x="X",by.y="X",all.x=TRUE)
 rownames(counts_SM_annot)=counts_SM_annot$X
 counts_SM_annot=counts_SM_annot[,-c(21:32)]
-write.csv(counts_SM_annot, "../filt_txt_all_2/counts.all_annot_SM.csv", row.names = F)
+# write.csv(counts_SM_annot, "../filt_txt_all_2/counts.all_annot_SM.csv", row.names = F)
 
 
 

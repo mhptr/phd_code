@@ -333,6 +333,53 @@ resSig.SH5.01
 
 
 
+
+################################################################
+# #Data transformations and visualization
+################################################################
+
+################################################################
+###### Extracting transformed values
+################################################################
+
+vsd.SH5 <- vst(dds.SH5, blind=FALSE)
+rld.SH5 <- rlog(dds.SH5, blind=FALSE)
+head(assay(vsd.SH5), 3)
+
+# PCA
+
+pcaData_SH5 <- plotPCA(vsd.SH5, intgroup=c("media", "genotype"), returnData=TRUE)
+percentVar_SH5 <- round(100 * attr(pcaData_SH5, "percentVar"))
+pdf("../diff.exp.gene/DEG_SM/Figures/PCA/SH5/PCA_DEG_vsd_SH5.pdf",width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot(pcaData_SH5, aes(PC1, PC2, color=genotype, shape=media)) + geom_point(size=3) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar_SH5[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar_SH5[2],"% variance")) + 
+  ggtitle("PCA Plot \nTranscriptomic Analysis (vsd) - SH5") +
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold")
+  ) + 
+  coord_fixed()
+dev.off() 
+plot(g)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ###################################  ALL GOOD SO FAR  ################################### 
 
 

@@ -332,6 +332,49 @@ resSig.SH2.01
 #write.csv(as.data.frame(resSig.SH2.01), 
 #          file="DEG_ko_vs_wt_p0.01_SH2_sm.csv")
 
+################################################################
+# #Data transformations and visualization
+################################################################
+
+################################################################
+###### Extracting transformed values
+################################################################
+
+vsd.SH2 <- vst(dds.SH2, blind=FALSE)
+rld.SH2 <- rlog(dds.SH2, blind=FALSE)
+head(assay(vsd.SH2), 3)
+
+# PCA
+
+pcaData_SH2 <- plotPCA(vsd.SH2, intgroup=c("media", "genotype"), returnData=TRUE)
+percentVar_SH2 <- round(100 * attr(pcaData_SH2, "percentVar"))
+pdf("../diff.exp.gene/DEG_SM/Figures/PCA/SH2/PCA_DEG_vsd_SH2.pdf" , width=10, height=10)      #turn this OFF if just want to see the picture in the Plots
+g = ggplot(pcaData_SH2, aes(PC1, PC2, color=genotype, shape=media)) + geom_point(size=3) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar_SH2[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar_SH2[2],"% variance")) + 
+  ggtitle("PCA Plot \nTranscriptomic Analysis (vsd) - SH2") +
+  theme(
+    plot.title = element_text(hjust = 0.5, color="darkBlue", face="bold", size=14),
+    axis.title.x = element_text(color="black", size=12, face="bold"),
+    axis.title.y = element_text(color="black", size=12, face="bold")
+  ) + 
+coord_fixed()
+dev.off() 
+plot(g)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ###################################  ALL GOOD SO FAR  ################################### 
