@@ -284,7 +284,7 @@ pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=TRUE,
 sampleDists <- dist(t(assay(vsd)))
 library("RColorBrewer")
 sampleDistMatrix <- as.matrix(sampleDists)
-rownames(sampleDistMatrix) <- paste(vsd$genotype, vsd$media, sep="-")
+rownames(sampleDistMatrix) <- paste(vsd$media, vsd$genotype, sep="_")
 colnames(sampleDistMatrix) <- TRUE
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
 pheatmap(sampleDistMatrix,
@@ -294,12 +294,6 @@ pheatmap(sampleDistMatrix,
 
 
 #Principal component plot of the samples
-
-
-
-
-
-
 # PCA
 
 pcaData <- plotPCA(vsd, intgroup=c("media", "genotype"), returnData=TRUE)
@@ -380,10 +374,14 @@ plot(g)
 
 
 
-
-
-
-
+#Extracting transformed values
+vsd <- vst(dds, blind=FALSE)
+head(assay(vsd), 3)
+# this gives log2(n + 1)
+ntd <- normTransform(dds)
+library("vsn")
+meanSdPlot(assay(ntd))
+meanSdPlot(assay(vsd))
 
 
 
