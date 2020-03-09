@@ -195,6 +195,7 @@ sample.details.imputed$media_genot = paste0(sample.details.imputed$media,'.',
 #experimentalist[experimentalist %in% experimentalist[grep("SH", experimentalist)]] = "Swati"
 #sample.details.imputed$experimentalist = experimentalist
 
+pheatmap(data.pr.imputed)
 
 
 ####################################################################
